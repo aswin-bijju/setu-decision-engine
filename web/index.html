@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Setu Decision Engine</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo">S</span>
+      <div>
+        <strong>Setu</strong>
+        <small>Commercial decision engine for EU-India B2B teams</small>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btn-simulate" class="ghost" title="Push a realistic live signal into the ingestion queue">Inject live signal</button>
+      <button id="btn-run" class="primary">Run engine</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="decisions" class="active">Decision queue</button>
+    <button data-tab="accounts">Accounts</button>
+    <button data-tab="icp">ICP discovery</button>
+    <button data-tab="signals">Signals</button>
+    <button data-tab="audit">Audit &amp; write-back</button>
+    <button data-tab="engine">Engine</button>
+  </nav>
+
+  <main>
+    <section id="tab-decisions" class="tab active">
+      <div class="tiles" id="tiles"></div>
+      <div class="card briefing"><h3>Executive briefing</h3><p id="briefing">Loading…</p></div>
+      <div class="row-head">
+        <h2>Decisions awaiting review</h2>
+        <select id="decision-filter">
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="adjusted">Adjusted</option>
+          <option value="rejected">Rejected</option>
+          <option value="superseded">Superseded</option>
+          <option value="all">All</option>
+        </select>
+      </div>
+      <div id="decisions"></div>
+    </section>
+
+    <section id="tab-accounts" class="tab">
+      <div class="split">
+        <div class="card list" id="account-list"></div>
+        <div id="account-plan" class="plan"><p class="muted">Select an account to open its living account plan.</p></div>
+      </div>
+    </section>
+
+    <section id="tab-icp" class="tab">
+      <h2>Target-account discovery</h2>
+      <p class="muted">Prospects without an open deal, scored against your ICP, focus territories and live corridor signals.</p>
+      <div id="icp"></div>
+    </section>
+
+    <section id="tab-signals" class="tab">
+      <div class="card">
+        <h3>Ingest a signal</h3>
+        <form id="signal-form" class="form">
+          <label>Source <select name="source" id="source-select"></select></label>
+          <label>Stakeholder email (optional) <input name="email" placeholder="name@company.de"></label>
+          <label>Account id or name (optional) <input name="account" placeholder="rheinwerk"></label>
+          <label class="wide">Signal text <textarea name="text" rows="2" required placeholder="e.g. Sabine Krüger asked for a payback model before the steering committee"></textarea></label>
+          <button class="primary" type="submit">Add to ingestion queue</button>
+        </form>
+      </div>
+      <h2>Signal feed</h2>
+      <div id="events"></div>
+    </section>
+
+    <section id="tab-audit" class="tab">
+      <div class="split even">
+        <div><h2>Audit trail</h2><div id="audit"></div></div>
+        <div><h2>CRM and Slack write-back</h2><div id="outbox"></div></div>
+      </div>
+    </section>
+
+    <section id="tab-engine" class="tab">
+      <h2>How the engine works</h2>
+      <ol class="flow">
+        <li><b>Observe</b><span>10 sources: CRM, calendar, calls, Slack, email, buying signals, financial reports, product usage, hiring, news</span></li>
+        <li><b>Understand</b><span>Entity resolution to account, deal, stakeholder and competitor</span></li>
+        <li><b>Reason</b><span>Forecast, Pipeline, Champion, Competition, Territory, Expansion and Corridor agents, then Manager and Executive</span></li>
+        <li><b>Prioritise</b><span>Impact × urgency × strategic fit × confidence × learned agent weight</span></li>
+        <li><b>Recommend</b><span>A short queue with evidence, counter-signals and confidence</span></li>
+        <li><b>Review</b><span>Approve, adjust or reject. Approved actions write back to CRM and Slack</span></li>
+        <li><b>Learn</b><span>Each verdict moves the owning agent's weight</span></li>
+      </ol>
+      <div class="split even">
+        <div><h3>Agent weights (learning loop)</h3><div id="weights"></div></div>
+        <div><h3>Recent runs</h3><div id="runs"></div></div>
+      </div>
+      <p><button id="btn-reset" class="ghost danger">Reset demo data</button></p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

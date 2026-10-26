@@ -1,0 +1,13 @@
+services:
+  setu:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      SETU_DB: /data/setu.db
+    volumes:
+      - setu-data:/data
+    restart: unless-stopped
+
+volumes:
+  setu-data:
