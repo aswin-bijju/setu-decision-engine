@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;font-family:Barlow,system-ui,sans-serif;color:#1f2a44">
+<span style="font-size:13px;font-weight:600;color:#566074">Review gates</span>
+<sc-for list="{{ gates }}" as="g" hint-placeholder-count="3">
+<span style="display:inline-flex;align-items:center;gap:8px;font-size:14px"><span>Gate {{ g.n }}, {{ g.name }}</span><dc-import name="StatusTag" label="{{ g.label }}" tone="{{ g.tone }}" hint-size="56px,22px"></dc-import></span>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:60},&quot;g1&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pending&quot;,&quot;done&quot;,&quot;notneeded&quot;],&quot;default&quot;:&quot;done&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;g2&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pending&quot;,&quot;done&quot;,&quot;notneeded&quot;],&quot;default&quot;:&quot;pending&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;g3&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pending&quot;,&quot;done&quot;,&quot;notneeded&quot;],&quot;default&quot;:&quot;notneeded&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const M = { pending: ['Pending', 'attention'], done: ['Done', 'verified'], notneeded: ['Not needed', 'quiet'] };
+    const N = ['Precedent check', 'Scope recheck', 'Direction approval'];
+    const gates = [this.props.g1, this.props.g2, this.props.g3].map((s, i) => { const m = M[s] || M.pending; return { n: String(i + 1), name: N[i], label: m[0], tone: m[1] }; });
+    return { gates };
+  }
+}
+</script>
+</body>
+</html>

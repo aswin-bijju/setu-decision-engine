@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="research" engine="literature" narrow="{{ narrow }}" run="4 Nov 2026, 16:20" source="search of 6 databases" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">LR-2026-07 · Literature review · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(30px,3.4cqi,48px);line-height:1.1;font-weight:600;letter-spacing:-0.01em;text-wrap:balance;max-width:900px">Do origin rules change how many shipments claim FTA preference?</h1>
+<div style="display:flex;flex-direction:column;gap:8px;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2"><dc-import name="GateBar" g1="notneeded" g2="notneeded" g3="done" hint-size="100%,26px"></dc-import><span style="font-size:15px">Direction 2 approved on 5 Nov 2026. <a href="#" style="color:#2f6f73;text-underline-offset:3px">See the approved direction</a></span></div>
+<dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border:1px solid #d6dce2;background:#ffffff">
+<sc-for list="{{ method }}" as="m" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-right:1px solid #d6dce2;border-bottom:1px solid #d6dce2"><dt style="font-size:13px;color:#566074">{{ m.k }}</dt><dd style="margin:0;font-weight:600">{{ m.v }}</dd></div></sc-for>
+</dl>
+</div>
+<section style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Evidence table</h2><p style="margin:0;color:#566074">Nine included studies; six shown. Findings are quoted from each study, with its class and verification.</p></div>
+<div tabindex="0" role="region" aria-label="Evidence table" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Evidence" style="min-width:1000px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:minmax(170px,1.2fr) 70px minmax(150px,1fr) minmax(150px,1fr) minmax(240px,1.8fr) 150px 130px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Study</span><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Year</span><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Setting</span><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Design</span><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Finding</span><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Evidence class</span><span role="columnheader" style="padding:12px 14px;font-size:13px;font-weight:500;color:#566074">Verification</span></div>
+<sc-for list="{{ studies }}" as="s" hint-placeholder-count="6"><div role="row" style="display:grid;grid-template-columns:minmax(170px,1.2fr) 70px minmax(150px,1fr) minmax(150px,1fr) minmax(240px,1.8fr) 150px 130px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:12px 14px;font-weight:600">{{ s.name }}</span><span role="cell" style="padding:12px 14px;font-variant-numeric:tabular-nums">{{ s.year }}</span><span role="cell" style="padding:12px 14px">{{ s.setting }}</span><span role="cell" style="padding:12px 14px">{{ s.design }}</span><span role="cell" style="padding:12px 14px">{{ s.finding }}</span><span role="cell" style="padding:12px 14px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="{{ s.cls }}" tone="neutral" hint-size="110px,22px"></dc-import></span><span role="cell" style="padding:12px 14px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="{{ s.status }}" tone="{{ s.tone }}" hint-size="80px,22px"></dc-import></span></div></sc-for>
+</div>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px;max-width:860px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">What the review says</h2>
+<div style="background:#e2eeee;padding:16px 20px;font-size:17px"><strong style="font-weight:600">Our reading:</strong> simpler origin procedures go with higher preference use in most settings studied, and the effect is largest for small exporters. None of the studies covers India, so the size of the effect for Client A’s clients is open.</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2"><dc-import name="StatusTag" label="Not found" tone="quiet" hint-size="70px,22px"></dc-import><span>No study measures uptake of exporter statements for shipments into India. This is a gap in the literature, not an error in the search.</span></div>
+<p style="margin:0;font-size:15px">Feeds <a href="#" style="color:#2f6f73;text-underline-offset:3px">Assumption Ledger row FTA-A07</a> as evidence for the confidence change.</p>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const method = [
+      { k: 'Direction', v: '2 of 3, approved 5 Nov 2026' }, { k: 'Search', v: '6 databases, 2005 to 2026' },
+      { k: 'Screening', v: '212 found, 31 screened in, 9 included' }, { k: 'Time used', v: '2 of 3 analyst days' }
+    ];
+    const T = { 'Verified': 'verified', 'Reported': 'neutral', 'Not yet reviewed': 'unreviewed', 'NEEDS PRIMARY': 'attention' };
+    const S = [
+      ['Study A, journal article', '2014', 'EU and partner agreements', 'Panel of customs records', 'Preference use rose after origin procedures were simplified.', 'E3 Peer-reviewed study', 'Verified'],
+      ['Study B, working paper', '2019', 'EU and South Korea', 'Before and after comparison', 'Small exporters gained the most from origin declarations.', 'E5 Grey literature', 'Reported'],
+      ['Study C, journal article', '2021', 'Regional agreement, Americas', 'Firm survey', 'Firms named documentation cost as the main reason not to claim preference.', 'E3 Peer-reviewed study', 'Verified'],
+      ['Study D, agency report', '2017', 'Multiple EU agreements', 'Statistical review', 'Utilisation rates differ widely by sector and partner.', 'E2 Official record', 'Verified'],
+      ['Study E, conference paper', '2023', 'ASEAN and India', 'Case study', 'Certificate checks at entry ports delayed preferential claims.', 'E5 Grey literature', 'NEEDS PRIMARY'],
+      ['Study F, working paper', '2025', 'EU and Japan', 'Customs data analysis', 'Importer-knowledge option used for a small share of claims.', 'E5 Grey literature', 'Not yet reviewed']
+    ];
+    const studies = S.map(s => ({ name: s[0], year: s[1], setting: s[2], design: s[3], finding: s[4], cls: s[5], status: s[6], tone: T[s[6]] }));
+    return { narrow: !!this.props.narrow, method, studies };
+  }
+}
+</script>
+</body>
+</html>

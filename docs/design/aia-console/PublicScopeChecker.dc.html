@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<header style="border-bottom:1px solid #d6dce2"><div style="max-width:1152px;margin:0 auto;padding:16px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">
+<a href="#" style="font-size:20px;font-weight:600;line-height:1.2;color:#1f2a44;text-decoration:none">AIA Stakeholder Intelligence</a>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px">
+<nav aria-label="Site" style="display:flex;flex-wrap:wrap;gap:0 20px;font-size:15px"><a href="#" style="padding:12px 0;color:#566074;text-decoration:none">What AIA is</a><a href="#" style="padding:12px 0;color:#566074;text-decoration:none">Method</a><a href="#" style="padding:12px 0;color:#566074;text-decoration:none">Register</a><a href="#" aria-current="page" style="padding:12px 0 9px;color:#2f6f73;font-weight:600;text-decoration:none;border-bottom:3px solid #2f6f73">Was gilt für uns?</a></nav>
+<div role="group" aria-label="Language" style="display:flex;border:1px solid #1f2a44;border-radius:2px;overflow:hidden"><button type="button" aria-pressed="true" style="min-width:44px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#ffffff;background:#1f2a44;border:0">EN</button><button type="button" aria-pressed="false" style="min-width:44px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#1f2a44;background:#ffffff;border:0">DE</button></div>
+</div>
+</div></header>
+<main style="max-width:1152px;margin:0 auto;padding:48px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">Free scope checker · The example answers use fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(34px,4cqi,58px);line-height:1.05;font-weight:600;letter-spacing:-0.01em">Was gilt für uns?</h1>
+<p style="margin:0;font-size:19px;line-height:1.6;max-width:720px;text-wrap:pretty">Which EU-India trade rules reach your company? Five questions, about three minutes. Your answers stay in this browser and are not sent anywhere.</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+<form style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ questions }}" as="q" hint-placeholder-count="5">
+<fieldset style="margin:0;padding:18px 20px;background:#ffffff;border:1px solid #d6dce2;display:flex;flex-direction:column;gap:8px">
+<legend style="padding:0;font-size:13px;font-weight:600;color:#566074">Question {{ q.n }} of 5</legend>
+<span style="font-size:18px;font-weight:600;line-height:1.3">{{ q.text }}</span>
+<div style="display:flex;flex-wrap:wrap;gap:4px 20px">
+<sc-for list="{{ q.options }}" as="o" hint-placeholder-count="3"><label style="display:flex;align-items:center;gap:10px;min-height:44px;font-size:16px;cursor:pointer"><input type="radio" name="{{ q.name }}" checked="{{ o.on }}" style="width:20px;height:20px;margin:0;accent-color:#2f6f73">{{ o.label }}</label></sc-for>
+</div>
+</fieldset>
+</sc-for>
+<div style="display:flex"><button type="button" style="min-height:48px;padding:0 24px;font-family:inherit;font-size:16px;font-weight:600;color:#ffffff;background:#2f6f73;border:1px solid #2f6f73;border-radius:2px;cursor:pointer" style-hover="background:#1f2a44;border-color:#1f2a44">Check what applies</button></div>
+</form>
+<section aria-label="Result" style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">What this means for you</h2>
+<sc-for list="{{ buckets }}" as="b" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:10px;padding:18px 20px;background:#ffffff;border:1px solid #d6dce2">
+<h3 style="margin:0;font-size:20px;font-weight:600">{{ b.name }} <span style="font-weight:500;color:#566074">{{ b.count }}</span></h3>
+<sc-for list="{{ b.rules }}" as="r" hint-placeholder-count="1">
+<div style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:1px solid #d6dce2">
+<span style="font-weight:600">{{ r.rule }}</span>
+<dl style="margin:0;display:grid;grid-template-columns:110px 1fr;gap:2px 12px;font-size:15px"><dt style="color:#566074">Your answer</dt><dd style="margin:0">{{ r.input }}</dd><dt style="color:#566074">Threshold</dt><dd style="margin:0">{{ r.threshold }}</dd><dt style="color:#566074">Test</dt><dd style="margin:0">{{ r.test }}</dd><dt style="color:#566074">Result</dt><dd style="margin:0;font-weight:600">{{ r.result }}</dd></dl>
+<a href="#" style="font-size:15px;color:#2f6f73;text-underline-offset:3px">Register row {{ r.id }}</a>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<p style="margin:0;font-size:14px;color:#566074">Last verified 5 Nov 2026 · General information, not legal advice.</p>
+</section>
+</div>
+<section style="display:flex;flex-direction:column;gap:14px;padding-top:32px;border-top:1px solid #d6dce2">
+<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">The register behind this check</h2><p style="margin:0;max-width:720px">27 rules tracked for logistics companies in the EU-India corridor. Last verified 5 Nov 2026.</p></div>
+<div role="list" aria-label="Rules by lifecycle stage" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border:1px solid #d6dce2;background:#ffffff">
+<sc-for list="{{ stages }}" as="s" hint-placeholder-count="7"><div role="listitem" style="display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-right:1px solid #d6dce2;border-bottom:1px solid #d6dce2"><span style="font-size:14px;color:#566074">{{ s.name }}</span><span style="font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums">{{ s.n }}</span></div></sc-for>
+</div>
+<a href="#" style="align-self:flex-start;font-size:15px;color:#2f6f73;text-underline-offset:3px;padding:6px 0">See the register summary</a>
+</section>
+</main>
+<footer style="border-top:1px solid #d6dce2"><div style="max-width:1152px;margin:0 auto;padding:20px 16px;box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:14px;color:#566074"><span>AIA Stakeholder Intelligence · General information, not legal advice.</span><span style="display:flex;gap:20px"><a href="#" style="color:#2f6f73">Imprint</a><a href="#" style="color:#2f6f73">Privacy</a></span></div></footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const Q = [
+      ['base', 'Where is your company based?', ['Germany', 'Another EU country', 'India', 'Elsewhere'], 0],
+      ['role', 'What do you do in the corridor?', ['We export goods', 'We import goods', 'We move goods for others'], 2],
+      ['customs', 'Do you file customs declarations for others?', ['Yes', 'No', 'Not sure'], 0],
+      ['tenders', 'Do you bid for public contracts in India?', ['Yes', 'No', 'Not sure'], 1],
+      ['volume', 'Shipments a year between the EU and India', ['Under 1,000', '1,000 to 5,000', 'Over 5,000'], 1]
+    ];
+    const questions = Q.map((q, i) => ({ n: String(i + 1), name: q[0], text: q[1], options: q[2].map((l, j) => ({ label: l, on: j === q[3] })) }));
+    const buckets = [
+      { name: 'Applies to you', count: '2', rules: [
+        { id: 'TL-FTA-07', rule: 'Customs and trade facilitation', input: 'You file declarations for others', threshold: 'Acts as declarant or customs representative', test: 'Declarant on EU-India shipments', result: 'Applies' },
+        { id: 'TL-FTA-11', rule: 'Road and air freight services', input: 'You move goods for others', threshold: 'Supplies freight services across the border', test: 'Sells the service across the border', result: 'Applies' } ] },
+      { name: 'Reaches you anyway', count: '1', rules: [
+        { id: 'TL-FTA-12', rule: 'Rules of origin', input: 'You move goods for exporters', threshold: 'The exporter makes the origin statement', test: 'You do not make it yourself', result: 'Reaches you through your clients' } ] },
+      { name: 'Out of scope', count: '1', rules: [
+        { id: 'TL-FTA-09', rule: 'Government procurement', input: 'You do not bid in India', threshold: 'Bids for Indian public contracts', test: 'No bids', result: 'Out of scope' } ] }
+    ];
+    const stages = [['Proposal', '1'], ['Negotiation', '10'], ['Text published', '6'], ['Signed', '2'], ['Ratification', '2'], ['In force', '4'], ['Unknown', '2']].map(([name, n]) => ({ name, n }));
+    return { narrow: !!this.props.narrow, questions, buckets, stages };
+  }
+}
+</script>
+</body>
+</html>

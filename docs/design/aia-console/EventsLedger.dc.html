@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="records" engine="events" narrow="{{ narrow }}" source="Events Ledger import v12" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">Events Ledger · 445 events · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em">Events Ledger</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:740px;text-wrap:pretty">Historical events from 1760 to 2026 by 5-year block and country, coded by Pattern and Lever. Pick a cell to see its events and use them as precedents.</p>
+</div>
+<div role="group" aria-label="Filters" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 16px;padding:16px;background:#ffffff;border:1px solid #d6dce2">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="6"><label style="flex:1 1 130px;display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:#566074">{{ f.label }}<select style="min-height:44px;width:100%;padding:0 10px;font-family:inherit;font-size:15px;font-weight:400;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px"><option>{{ f.value }}</option></select></label></sc-for>
+<button type="button" style="min-height:44px;padding:0;font-family:inherit;font-size:15px;font-weight:500;color:#2f6f73;background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer" style-hover="color:#1f2a44">Clear filters</button>
+</div>
+<p style="margin:0;font-size:15px">{{ total }} of 445 events match. 17 of 54 blocks shown; the period filter hides the 37 blocks before 1945.</p>
+<sc-if value="{{ isPatterns }}"><div style="display:flex;flex-wrap:wrap;gap:4px 20px;font-size:14px"><span style="font-weight:600;color:#566074">Cell shows count and main Pattern:</span><sc-for list="{{ legend }}" as="l" hint-placeholder-count="6"><span><strong style="font-weight:600">{{ l.code }}</strong> {{ l.name }}</span></sc-for></div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+<div tabindex="0" role="region" aria-label="Events by 5-year block and country" style="flex:999 1 720px;min-width:0;overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="grid" aria-label="Events matrix, blocks down, countries across" style="min-width:820px;font-size:14px">
+<div role="row" style="display:grid;grid-template-columns:116px repeat(10,minmax(64px,1fr));border-bottom:1px solid #d6dce2;background:#f7f7f5"><span role="columnheader" style="padding:10px 8px;font-size:13px;font-weight:500;color:#566074">Block</span><sc-for list="{{ countries }}" as="c" hint-placeholder-count="10"><span role="columnheader" style="padding:10px 4px;font-size:13px;font-weight:500;line-height:1.2;color:#566074;text-align:center">{{ c }}</span></sc-for></div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="17">
+<div role="row" style="display:grid;grid-template-columns:116px repeat(10,minmax(64px,1fr));border-bottom:1px solid #d6dce2"><span role="rowheader" style="display:flex;align-items:center;padding:0 8px;font-size:13px;color:#566074;font-variant-numeric:tabular-nums">{{ r.label }}</span>
+<sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="10">
+<sc-if value="{{ c.zero }}"><button type="button" role="gridcell" aria-label="{{ c.aria }}" onClick="{{ c.pick }}" style="min-height:44px;margin:2px;font-family:inherit;font-size:14px;color:#566074;background:#ffffff;border:1px solid transparent;cursor:pointer;font-variant-numeric:tabular-nums" style-hover="border-color:#566074">0</button></sc-if>
+<sc-if value="{{ c.some }}"><button type="button" role="gridcell" aria-label="{{ c.aria }}" onClick="{{ c.pick }}" style="min-height:44px;margin:2px;font-family:inherit;font-size:14px;font-weight:600;color:#1f2a44;background:#e2eeee;border:1px solid #e2eeee;cursor:pointer;font-variant-numeric:tabular-nums" style-hover="border-color:#2f6f73">{{ c.text }}</button></sc-if>
+<sc-if value="{{ c.on }}"><button type="button" role="gridcell" aria-selected="true" aria-label="{{ c.aria }}" style="min-height:44px;margin:2px;font-family:inherit;font-size:14px;font-weight:600;color:#ffffff;background:#2f6f73;border:1px solid #2f6f73;cursor:pointer;font-variant-numeric:tabular-nums">{{ c.text }}</button></sc-if>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ isCounts }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Selected cell" style="flex:1 1 300px;max-width:400px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;padding:20px;background:#ffffff;border:1px solid #d6dce2">
+<span style="font-size:13px;font-weight:600;color:#566074">Selected cell</span>
+<h2 style="margin:0;font-size:22px;font-weight:600;line-height:1.2">{{ selTitle }}</h2>
+<p style="margin:0">{{ selCount }}</p>
+<sc-for list="{{ selEvents }}" as="e" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px;padding:10px 0;border-top:1px solid #d6dce2"><span style="display:flex;gap:8px;align-items:baseline"><a href="#" style="font-weight:600;color:#2f6f73;text-underline-offset:3px">{{ e.id }}</a><span style="font-size:13px;color:#566074">{{ e.year }}</span></span><span>{{ e.title }}</span><span style="font-size:13px;color:#566074">Pattern: {{ e.pattern }} · Lever: {{ e.lever }}</span><div style="display:flex;flex-wrap:wrap;gap:6px"><dc-import name="StatusTag" label="{{ e.ev }}" tone="neutral" hint-size="120px,22px"></dc-import><dc-import name="StatusTag" label="{{ e.status }}" tone="{{ e.tone }}" hint-size="70px,22px"></dc-import></div></div></sc-for>
+<sc-if value="{{ noList }}"><p style="margin:0;color:#566074">The events for this cell load when you open it.</p></sc-if>
+<a href="#" style="font-size:15px;color:#2f6f73;text-underline-offset:3px;padding:8px 0">Use these as precedents in a review gate</a>
+</aside>
+</sc-if>
+</div>
+<sc-if value="{{ isPatterns }}">
+<section aria-label="Selected cell" style="display:flex;flex-direction:column;gap:10px;padding:20px;background:#ffffff;border:1px solid #d6dce2">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px"><h2 style="margin:0;font-size:22px;font-weight:600;line-height:1.2">{{ selTitle }} <span style="font-weight:500;color:#566074">{{ selCount }}</span></h2><a href="#" style="font-size:15px;color:#2f6f73;text-underline-offset:3px">Use these as precedents in a review gate</a></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 24px">
+<sc-for list="{{ selEvents }}" as="e" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px;padding:12px 0;border-top:1px solid #d6dce2"><span style="display:flex;gap:8px;align-items:baseline"><a href="#" style="font-weight:600;color:#2f6f73;text-underline-offset:3px">{{ e.id }}</a><span style="font-size:13px;color:#566074">{{ e.year }}</span></span><span>{{ e.title }}</span><span style="font-size:13px;color:#566074">Pattern: {{ e.pattern }} · Lever: {{ e.lever }}</span><div style="display:flex;flex-wrap:wrap;gap:6px"><dc-import name="StatusTag" label="{{ e.ev }}" tone="neutral" hint-size="120px,22px"></dc-import><dc-import name="StatusTag" label="{{ e.status }}" tone="{{ e.tone }}" hint-size="70px,22px"></dc-import></div></div></sc-for>
+</div>
+<sc-if value="{{ noList }}"><p style="margin:0;color:#566074">The events for this cell load when you open it.</p></sc-if>
+</section>
+</sc-if>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;counts&quot;,&quot;patterns&quot;],&quot;default&quot;:&quot;counts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { sel: null };
+  renderVals() {
+    const patterns = this.props.variant === 'patterns';
+    const C = ['India', 'Germany', 'France', 'Netherlands', 'United Kingdom', 'EU', 'United States', 'China', 'Japan', 'Other'];
+    const W = [1.7, 1.2, 0.8, 0.6, 1.0, 1.5, 1.1, 0.9, 0.7, 1.1];
+    const P = ['T', 'O', 'S', 'R', 'M', 'D'];
+    const PN = { T: 'Tariff ladder', O: 'Origin tightening', S: 'Standards as barrier', R: 'Retaliation', M: 'Market opening', D: 'Data and digital rules' };
+    let seed = 11;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const sel = this.state.sel ?? '15-0';
+    let total = 0, selTitle = '', selN = 0;
+    const rows = [];
+    for (let b = 0; b < 17; b++) {
+      const y = 1945 + b * 5;
+      const label = b === 16 ? '2025 to 2026' : y + ' to ' + (y + 4);
+      const cells = C.map((c, ci) => {
+        let n = Math.floor(rnd() * (0.5 + b / 8) * W[ci] * 1.5);
+        const code = P[Math.floor(rnd() * P.length)];
+        if (b === 15 && ci === 0) n = 4;
+        total += n;
+        const key = b + '-' + ci;
+        const on = key === sel;
+        if (on) { selTitle = c + ', ' + label; selN = n; }
+        const text = patterns && n ? n + ' ' + (b === 15 && ci === 0 ? 'O' : code) : String(n);
+        return { text, zero: n === 0 && !on, some: n > 0 && !on, on, aria: c + ', ' + label + ': ' + n + ' events', pick: () => this.setState({ sel: key }) };
+      });
+      rows.push({ label, cells });
+    }
+    const fixed = sel === '15-0';
+    const selEvents = fixed ? [
+      { id: 'EV-0421', year: '2020', title: 'Origin verification rules for preferential imports', pattern: 'Origin tightening', lever: 'Rules of origin', ev: 'E1 Primary legal text', status: 'Verified', tone: 'verified' },
+      { id: 'EV-0423', year: '2020', title: 'Production-linked incentive schemes for manufacturing', pattern: 'Market opening', lever: 'Subsidies', ev: 'E1 Primary legal text', status: 'Verified', tone: 'verified' },
+      { id: 'EV-0427', year: '2021', title: 'Customs duty increases on electronic components', pattern: 'Tariff ladder', lever: 'Tariffs', ev: 'E4 Press report', status: 'Reported', tone: 'neutral' },
+      { id: 'EV-0431', year: '2023', title: 'Personal data protection act passed', pattern: 'Data and digital rules', lever: 'Data transfer', ev: 'E4 Press report', status: 'NEEDS PRIMARY', tone: 'attention' }
+    ] : [];
+    const filters = [{ label: 'From', value: '1945' }, { label: 'To', value: '2026' }, { label: 'Countries', value: 'All 10' }, { label: 'Pattern', value: 'All patterns' }, { label: 'Lever', value: 'All levers' }, { label: 'Evidence class', value: 'Any' }];
+    return {
+      narrow: !!this.props.narrow, isCounts: !patterns, isPatterns: patterns, countries: C, rows, total: String(total), filters,
+      legend: P.map(k => ({ code: k, name: PN[k] })), selTitle, selCount: selN === 1 ? '1 event' : selN + ' events', selEvents, noList: !fixed
+    };
+  }
+}
+</script>
+</body>
+</html>

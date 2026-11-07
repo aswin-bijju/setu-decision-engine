@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="records" engine="assumptions" narrow="{{ narrow }}" source="Assumption Ledger, nightly check" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:32px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:28px">
+<nav aria-label="Breadcrumb" style="display:flex;flex-wrap:wrap;gap:6px;font-size:14px;color:#566074"><a href="#" style="color:#2f6f73">Assumption Ledger</a><span>/</span><a href="#" style="color:#2f6f73">FTA-A07</a><span>/</span><span aria-current="page">Review gates</span></nav>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-wrap:wrap;gap:6px"><dc-import name="StatusTag" label="Assumption Ledger" tone="neutral" hint-size="120px,22px"></dc-import><dc-import name="StatusTag" label="Confidence change" tone="neutral" hint-size="120px,22px"></dc-import><dc-import name="StatusTag" label="Waiting for a person" tone="attention" hint-size="130px,22px"></dc-import></div>
+<h1 style="margin:0;font-size:clamp(30px,3.4cqi,48px);line-height:1.1;font-weight:600;letter-spacing:-0.01em;text-wrap:balance">Review gates for FTA-A07</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:760px;text-wrap:pretty">Proposed change: lower confidence from 0.70 to 0.50 that Indian customs accept exporter origin statements from the first year. The change waits until every gate is done or marked not needed.</p>
+</div>
+<sc-if value="{{ isStepped }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:28px">
+<div role="tablist" aria-label="Review gates" style="display:flex;flex-wrap:wrap;border-bottom:1px solid #d6dce2">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+<sc-if value="{{ t.active }}"><button type="button" role="tab" aria-selected="true" onClick="{{ t.select }}" style="flex:1 1 220px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px 20px 10px;font-family:inherit;color:#1f2a44;background:#ffffff;border:1px solid #d6dce2;border-bottom:3px solid #2f6f73;margin-bottom:-1px;cursor:pointer;text-align:left"><span style="font-size:13px;color:#566074">Gate {{ t.n }}</span><span style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:16px;font-weight:600">{{ t.name }}<dc-import name="StatusTag" label="{{ t.label }}" tone="{{ t.tone }}" hint-size="56px,22px"></dc-import></span></button></sc-if>
+<sc-if value="{{ t.inactive }}"><button type="button" role="tab" aria-selected="false" onClick="{{ t.select }}" style="flex:1 1 220px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px 20px 10px;font-family:inherit;color:#1f2a44;background:transparent;border:1px solid transparent;border-bottom:3px solid transparent;margin-bottom:-1px;cursor:pointer;text-align:left" style-hover="background:#ffffff"><span style="font-size:13px;color:#566074">Gate {{ t.n }}</span><span style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:16px;font-weight:500">{{ t.name }}<dc-import name="StatusTag" label="{{ t.label }}" tone="{{ t.tone }}" hint-size="56px,22px"></dc-import></span></button></sc-if>
+</sc-for>
+</div>
+<div role="tabpanel">
+<sc-if value="{{ show1 }}" hint-placeholder-val="{{ true }}"><dc-import name="GatePrecedents" state="cards" status="done" hint-size="100%,1600px"></dc-import></sc-if>
+<sc-if value="{{ show2 }}"><dc-import name="GateScope" state="pending" hint-size="100%,900px"></dc-import></sc-if>
+<sc-if value="{{ show3 }}"><dc-import name="GateDirections" state="pending" hint-size="100%,700px"></dc-import></sc-if>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isStacked }}">
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+<aside aria-label="Where this item stands" style="flex:1 1 260px;max-width:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;padding:20px;background:#ffffff;border:1px solid #d6dce2">
+<h2 style="margin:0;font-size:18px;font-weight:600">Where this item stands</h2>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #d6dce2;font-size:15px"><span>Gate {{ t.n }}, {{ t.name }}</span><dc-import name="StatusTag" label="{{ t.label }}" tone="{{ t.tone }}" hint-size="56px,22px"></dc-import></div></sc-for>
+</div>
+<p style="margin:0;font-size:15px">The change takes effect only after Gates 2 and 3 are done.</p>
+<dl style="margin:0;display:flex;flex-direction:column;gap:6px;font-size:14px">
+<div style="display:flex;gap:8px"><dt style="color:#566074;min-width:90px">Item</dt><dd style="margin:0">FTA-A07</dd></div>
+<div style="display:flex;gap:8px"><dt style="color:#566074;min-width:90px">Opened</dt><dd style="margin:0">30 Oct 2026</dd></div>
+<div style="display:flex;gap:8px"><dt style="color:#566074;min-width:90px">Proposed by</dt><dd style="margin:0">Register Watch agent</dd></div>
+</dl>
+<a href="#" style="font-size:15px;color:#2f6f73;text-underline-offset:3px">Open FTA-A07 in the Assumption Ledger</a>
+</aside>
+<div style="flex:999 1 600px;min-width:0;display:flex;flex-direction:column;gap:48px">
+<section style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;background:#ffffff;border:1px solid #d6dce2">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px"><h3 style="margin:0;font-size:22px;font-weight:600;line-height:1.25">Gate 1, Precedent check</h3><dc-import name="StatusTag" label="Done" tone="verified" hint-size="48px,22px"></dc-import></div>
+<p style="margin:0">Two precedents kept: EV-0402, verified as E2 Official record, and EV-0377, still a ledger lead. EV-0436 dropped with a reason. One counter-case: EV-0421.</p>
+<div style="display:flex"><button type="button" style="min-height:44px;padding:0;font-family:inherit;font-size:16px;font-weight:500;color:#2f6f73;background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer" style-hover="color:#1f2a44">Show the precedent cards</button></div>
+</section>
+<dc-import name="GateScope" state="pending" hint-size="100%,900px"></dc-import>
+<dc-import name="GateDirections" state="pending" hint-size="100%,700px"></dc-import>
+</div>
+</div>
+</sc-if>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;stepped&quot;,&quot;stacked&quot;],&quot;default&quot;:&quot;stepped&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { active: null };
+  renderVals() {
+    const stacked = this.props.layout === 'stacked';
+    const active = this.state.active ?? (+this.props.active || 1);
+    const S = [['Precedent check', 'Done', 'verified'], ['Scope recheck', 'Pending', 'attention'], ['Direction approval', 'Pending', 'attention']];
+    const tabs = S.map((s, i) => ({ n: String(i + 1), name: s[0], label: s[1], tone: s[2], active: active === i + 1, inactive: active !== i + 1, select: () => this.setState({ active: i + 1 }) }));
+    return { narrow: !!this.props.narrow, isStepped: !stacked, isStacked: stacked, tabs, show1: active === 1, show2: active === 2, show3: active === 3 };
+  }
+}
+</script>
+</body>
+</html>

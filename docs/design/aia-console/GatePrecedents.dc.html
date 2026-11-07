@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<section style="display:flex;flex-direction:column;gap:20px;font-family:Barlow,system-ui,sans-serif;color:#1f2a44;font-size:16px;line-height:1.5">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px"><h3 style="margin:0;font-size:22px;font-weight:600;line-height:1.25">Gate 1, Precedent check</h3><dc-import name="StatusTag" label="{{ statusLabel }}" tone="{{ statusTone }}" hint-size="56px,22px"></dc-import></div>
+<p style="margin:0;max-width:720px;color:#566074">Up to five events from the Events Ledger that resemble this item, compared on six dimensions. Each one stays a lead until someone opens its source.</p>
+</div>
+<sc-if value="{{ hasCards }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ precedents }}" as="p" hint-placeholder-count="3"><dc-import name="PrecedentCard" p="{{ p }}" mode="{{ p.mode }}" hint-size="100%,420px"></dc-import></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px;margin-top:8px"><h4 style="margin:0;font-size:18px;font-weight:600">Counter-cases</h4><p style="margin:0;color:#566074">Events with a similar mechanism and a different outcome, kept apart so they are not read as support.</p></div>
+<sc-for list="{{ counters }}" as="p" hint-placeholder-count="1"><dc-import name="PrecedentCard" p="{{ p }}" mode="counter" hint-size="100%,420px"></dc-import></sc-for>
+<sc-if value="{{ isPending }}"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px"><button type="button" style="min-height:44px;padding:0 20px;font-family:inherit;font-size:16px;font-weight:600;color:#ffffff;background:#2f6f73;border:1px solid #2f6f73;border-radius:2px;cursor:pointer" style-hover="background:#1f2a44;border-color:#1f2a44">Approve</button><span style="font-size:14px;color:#566074">Approving closes Gate 1 with the precedents as they stand.</span></div></sc-if>
+</sc-if>
+<sc-if value="{{ isNone }}">
+<div style="display:flex;flex-direction:column;gap:10px;padding:24px;background:#ffffff;border:1px solid #d6dce2">
+<div style="display:flex"><dc-import name="StatusTag" label="No close precedent" tone="quiet" hint-size="130px,22px"></dc-import></div>
+<p style="margin:0;font-size:17px">No event in the Events Ledger matches this item on mechanism and sector. 445 events searched on 6 Nov 2026.</p>
+<p style="margin:0;color:#566074">This is a normal result. Gate 2 goes ahead without precedent support, and the item records that none was found.</p>
+</div>
+</sc-if>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1120,&quot;height&quot;:1800},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cards&quot;,&quot;none&quot;],&quot;default&quot;:&quot;cards&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;status&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;done&quot;,&quot;pending&quot;],&quot;default&quot;:&quot;done&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const none = this.props.state === 'none';
+    const pending = this.props.status === 'pending';
+    const item = { mech: 'Exporter states origin, no certificate', ctry: 'EU and India', per: '2026; Commission and Indian customs', sec: 'Machinery and parts, through forwarders', stage: 'Text published, not in force', scale: 'About 1,900 shipments a year at Client A' };
+    const rows = (m, c, pe, s, st, sc, same) => [
+      { dim: 'Mechanism', item: item.mech, prec: m, same: same[0] }, { dim: 'Countries', item: item.ctry, prec: c, same: same[1] },
+      { dim: 'Period and institutions', item: item.per, prec: pe, same: same[2] }, { dim: 'Sector', item: item.sec, prec: s, same: same[3] },
+      { dim: 'Legal stage', item: item.stage, prec: st, same: same[4] }, { dim: 'Scale', item: item.scale, prec: sc, same: same[5] }
+    ];
+    const precedents = [
+      { id: 'EV-0402', mode: 'verified', evidence: 'E2 Official record', opened: '4 Nov 2026', title: 'Exporter origin declarations adopted in a bilateral EU agreement', period: '2011', where: 'EU and South Korea', source: 'Official Journal, agreement text', rows: rows('Approved exporters declare origin on the invoice', 'EU and South Korea', '2011; Commission and Korean customs', 'All goods', 'Provisionally applied', 'All bilateral trade', ['Same', 'Different', 'Different', 'Same', 'Different', 'Unknown']) },
+      { id: 'EV-0377', mode: 'lead', title: 'Exporter-completed certificates of origin in a regional agreement', period: '1994', where: 'United States, Canada and Mexico', source: 'Agreement text, origin chapter', rows: rows('Exporter completes and signs the certificate', 'United States, Canada and Mexico', '1994; three national customs services', 'All goods', 'In force', 'Regional trade', ['Same', 'Different', 'Different', 'Same', 'Different', 'Unknown']) },
+      { id: 'EV-0436', mode: 'dropped', title: 'Origin statements with an importer-knowledge option', period: '2019', where: 'EU and Japan', source: 'Agreement text, origin protocol', dropReason: 'Japan also accepts importer knowledge, so the mechanism differs too much to compare. Dropped 4 Nov 2026.' }
+    ];
+    const counters = [
+      { id: 'EV-0421', title: 'India tightened origin verification for preferential imports', period: '2020', where: 'India', source: 'Customs notification', rows: rows('Importers must hold origin information on request', 'India and all FTA partners', '2020; Indian customs', 'All preferential imports', 'In force', 'All preferential imports', ['Different', 'Same', 'Same', 'Same', 'Different', 'Unknown']) }
+    ];
+    return { hasCards: !none, isNone: none, isPending: pending && !none, statusLabel: pending ? 'Pending' : 'Done', statusTone: pending ? 'attention' : 'verified', precedents, counters };
+  }
+}
+</script>
+</body>
+</html>

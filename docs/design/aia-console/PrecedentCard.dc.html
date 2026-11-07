@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<article style="display:flex;flex-direction:column;gap:14px;padding:20px;background:#ffffff;border:1px solid #d6dce2;font-family:Barlow,system-ui,sans-serif;color:#1f2a44;font-size:15px;line-height:1.45">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px"><a href="#" style="font-size:15px;font-weight:600;color:#2f6f73;text-underline-offset:3px">{{ p.id }}</a><span style="font-size:14px;color:#566074">{{ p.period }} · {{ p.where }}</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-if value="{{ isLead }}" hint-placeholder-val="{{ true }}"><dc-import name="StatusTag" label="Ledger lead, not yet verified" tone="unreviewed" hint-size="180px,22px"></dc-import></sc-if>
+<sc-if value="{{ isVerified }}"><dc-import name="StatusTag" label="{{ p.evidence }}" tone="neutral" hint-size="130px,22px"></dc-import><dc-import name="StatusTag" label="Verified" tone="verified" hint-size="60px,22px"></dc-import></sc-if>
+<sc-if value="{{ isCounter }}"><dc-import name="StatusTag" label="Counter-case" tone="neutral" hint-size="90px,22px"></dc-import><dc-import name="StatusTag" label="Ledger lead, not yet verified" tone="unreviewed" hint-size="180px,22px"></dc-import></sc-if>
+<sc-if value="{{ isDropped }}"><dc-import name="StatusTag" label="Dropped" tone="quiet" hint-size="64px,22px"></dc-import></sc-if>
+</div>
+</div>
+<h4 style="margin:0;font-size:18px;font-weight:600;line-height:1.3;text-wrap:pretty">{{ p.title }}</h4>
+<sc-if value="{{ showTable }}" hint-placeholder-val="{{ true }}">
+<div tabindex="0" role="region" aria-label="Comparison of this item with {{ p.id }}" style="overflow-x:auto;border:1px solid #d6dce2">
+<div role="table" aria-label="Comparison with {{ p.id }}" style="min-width:600px;font-size:14px">
+<div role="row" style="display:grid;grid-template-columns:150px minmax(150px,1fr) minmax(150px,1fr) 120px;border-bottom:1px solid #d6dce2;background:#f7f7f5"><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Dimension</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">This item</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">{{ p.id }}</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Same or different</span></div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+<div role="row" style="display:grid;grid-template-columns:150px minmax(150px,1fr) minmax(150px,1fr) 120px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:10px 12px;color:#566074">{{ r.dim }}</span><span role="cell" style="padding:10px 12px">{{ r.item }}</span><span role="cell" style="padding:10px 12px">{{ r.prec }}</span><span role="cell" style="padding:10px 12px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="{{ r.same }}" tone="{{ r.tone }}" hint-size="64px,22px"></dc-import></span></div>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:0 24px">
+<sc-if value="{{ isVerified }}"><span style="font-size:14px;color:#566074">Source opened {{ p.opened }}: {{ p.source }}</span></sc-if>
+<sc-if value="{{ canOpen }}"><a href="#" style="font-size:15px;color:#2f6f73;text-underline-offset:3px;padding:12px 0">Open source: {{ p.source }}</a></sc-if>
+<button type="button" style="min-height:44px;padding:0;font-family:inherit;font-size:15px;font-weight:500;color:#2f6f73;background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer" style-hover="color:#1f2a44">Drop precedent</button>
+</div>
+</sc-if>
+<sc-if value="{{ isDropped }}"><p style="margin:0"><span style="color:#566074">Reason: </span>{{ p.dropReason }}</p></sc-if>
+</article>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:460},&quot;p&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;lead&quot;,&quot;verified&quot;,&quot;counter&quot;,&quot;dropped&quot;],&quot;default&quot;:&quot;lead&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props.p || { id: 'EV-0377', title: 'Exporter-completed certificates of origin in a regional agreement', period: '1994', where: 'United States, Canada and Mexico', source: 'Agreement text, origin chapter', rows: [{ dim: 'Mechanism', item: 'Exporter states origin', prec: 'Exporter completes the certificate', same: 'Same' }, { dim: 'Countries', item: 'EU and India', prec: 'United States, Canada and Mexico', same: 'Different' }] };
+    const mode = this.props.mode || p.mode || 'lead';
+    const T = { Same: 'verified', Different: 'neutral', Unknown: 'quiet' };
+    return { p, rows: (p.rows || []).map(r => ({ ...r, tone: T[r.same] || 'quiet' })), isLead: mode === 'lead', isVerified: mode === 'verified', isCounter: mode === 'counter', isDropped: mode === 'dropped', showTable: mode !== 'dropped', canOpen: mode === 'lead' || mode === 'counter' };
+  }
+}
+</script>
+</body>
+</html>

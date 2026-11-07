@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<section style="display:flex;flex-direction:column;gap:20px;font-family:Barlow,system-ui,sans-serif;color:#1f2a44;font-size:16px;line-height:1.5">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px"><h3 style="margin:0;font-size:22px;font-weight:600;line-height:1.25">Gate 2, Scope recheck</h3><dc-import name="StatusTag" label="{{ statusLabel }}" tone="{{ statusTone }}" hint-size="64px,22px"></dc-import></div>
+<p style="margin:0;max-width:720px;color:#566074">The current verdict for Client A, rule by rule. Confirm it, change it with a reason, or drop a precedent that no longer holds.</p>
+</div>
+<sc-for list="{{ buckets }}" as="b" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h4 style="margin:0;font-size:18px;font-weight:600">{{ b.name }} <span style="font-weight:500;color:#566074">{{ b.count }}</span></h4>
+<div tabindex="0" role="region" aria-label="{{ b.name }}" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="{{ b.name }}" style="min-width:860px;font-size:14px">
+<div role="row" style="display:grid;grid-template-columns:170px minmax(170px,1.2fr) minmax(150px,1fr) minmax(150px,1fr) minmax(150px,1fr);border-bottom:1px solid #d6dce2;background:#f7f7f5"><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Rule</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Input</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Threshold</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Test</span><span role="columnheader" style="padding:10px 12px;font-size:13px;font-weight:500;color:#566074">Result</span></div>
+<sc-for list="{{ b.rules }}" as="r" hint-placeholder-count="2">
+<div role="row" style="display:grid;grid-template-columns:170px minmax(170px,1.2fr) minmax(150px,1fr) minmax(150px,1fr) minmax(150px,1fr);border-bottom:1px solid #d6dce2"><span role="cell" style="padding:12px;display:flex;flex-direction:column"><a href="#" style="font-weight:600;color:#2f6f73;text-underline-offset:3px">{{ r.id }}</a><span>{{ r.rule }}</span></span><span role="cell" style="padding:12px">{{ r.input }}</span><span role="cell" style="padding:12px">{{ r.threshold }}</span><span role="cell" style="padding:12px">{{ r.test }}</span><span role="cell" style="padding:12px;font-weight:600">{{ r.result }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-for>
+<p style="margin:0;font-size:14px;color:#566074">Last verified 5 Nov 2026 · General information, not legal advice.</p>
+<sc-if value="{{ isPending }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px"><button type="button" style="min-height:44px;padding:0 20px;font-family:inherit;font-size:16px;font-weight:600;color:#ffffff;background:#2f6f73;border:1px solid #2f6f73;border-radius:2px;cursor:pointer" style-hover="background:#1f2a44;border-color:#1f2a44">Approve</button><button type="button" style="min-height:44px;padding:0 20px;font-family:inherit;font-size:16px;font-weight:600;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">Adjust</button><button type="button" style="min-height:44px;padding:0 20px;font-family:inherit;font-size:16px;font-weight:600;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">Drop precedent</button><span style="font-size:14px;color:#566074;padding-left:8px">Adjust and Drop precedent ask for a reason.</span></div></sc-if>
+<sc-if value="{{ isApproved }}"><div style="padding:14px 16px;background:#ffffff;border:1px solid #2f6f73;font-size:15px">Approved 6 Nov 2026. Verdict unchanged: two rules apply, one reaches Client A anyway, one is out of scope.</div></sc-if>
+<sc-if value="{{ isAdjusted }}"><div style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:#ffffff;border:1px solid #2f6f73;font-size:15px"><span>Adjusted 6 Nov 2026: TL-FTA-12 moved from Reaches you anyway to Applies to you.</span><span><span style="color:#566074">Reason: </span>Client A signs origin statements as authorised representative for three exporter clients.</span></div></sc-if>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1120,&quot;height&quot;:1000},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pending&quot;,&quot;approved&quot;,&quot;adjusted&quot;],&quot;default&quot;:&quot;pending&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.props.state || 'pending';
+    const buckets = [
+      { name: 'Applies to you', count: '2', rules: [
+        { id: 'TL-FTA-07', rule: 'Customs and trade facilitation', input: 'Files customs declarations for exporter clients (client input, Sep 2026)', threshold: 'Acts as declarant or customs representative', test: 'Is Client A a declarant on EU-India shipments?', result: 'Yes: applies' },
+        { id: 'TL-FTA-11', rule: 'Road and air freight services', input: 'Runs road and air freight to India through partners', threshold: 'Supplies freight services across the border', test: 'Does Client A sell the service across the border?', result: 'Yes: applies' } ] },
+      { name: 'Reaches you anyway', count: '1', rules: [
+        { id: 'TL-FTA-12', rule: 'Rules of origin', input: 'Exporter clients claim FTA preference', threshold: 'The exporter makes the origin statement', test: 'Does Client A make the statement itself?', result: 'No, but clients will ask Client A to prepare it' } ] },
+      { name: 'Out of scope', count: '1', rules: [
+        { id: 'TL-FTA-09', rule: 'Government procurement', input: 'No public tenders in India (client input)', threshold: 'Bids for Indian public contracts', test: 'Does Client A bid?', result: 'No: out of scope' } ] }
+    ];
+    const done = s !== 'pending';
+    return { buckets, isPending: s === 'pending', isApproved: s === 'approved', isAdjusted: s === 'adjusted', statusLabel: done ? 'Done' : 'Pending', statusTone: done ? 'verified' : 'attention' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="approvals" engine="approvals" narrow="{{ narrow }}" source="all engines" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">Approvals inbox · Week 45 · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em;text-wrap:balance">8 decisions wait for a person</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:740px;text-wrap:pretty">Agents propose; a person decides. Nothing below takes effect until someone approves it. Every engine, oldest first.</p>
+</div>
+<div role="group" aria-label="Filter by engine" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ chips }}" as="c" hint-placeholder-count="8">
+<sc-if value="{{ c.active }}"><button type="button" aria-pressed="true" style="min-height:44px;padding:0 14px;font-family:inherit;font-size:15px;font-weight:600;color:#1f2a44;background:#e2eeee;border:1px solid #2f6f73;border-radius:2px;cursor:pointer">{{ c.label }}</button></sc-if>
+<sc-if value="{{ c.inactive }}"><button type="button" aria-pressed="false" onClick="{{ c.pick }}" style="min-height:44px;padding:0 14px;font-family:inherit;font-size:15px;font-weight:500;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">{{ c.label }}</button></sc-if>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ items }}" as="it" hint-placeholder-count="4"><dc-import name="ApprovalItem" item="{{ it }}" hint-size="100%,300px"></dc-import></sc-for>
+</div>
+<p style="margin:0;font-size:14px;color:#566074">Counts are team-level. The console logs decisions and their reasons. It does not record who opened what.</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { filter: 'all' };
+  renderVals() {
+    const I = [
+      { k: 'register', engine: 'Regulation Register', id: 'TL-FTA-12', kind: 'Change proposal', waiting: '9 days', ask: 'Move TL-FTA-12, rules of origin, from Negotiation to Text published', evidence: [{ fact: 'Consolidated rules-of-origin text published', source: 'EU trade portal', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' }, { fact: 'Matching Indian text', source: 'Indian Gazette search', date: '5 Nov 2026', status: 'Not found', tone: 'quiet' }], actBy: 'Fri 7 Nov, before the briefing send', gates: { g1: 'done', g2: 'pending', g3: 'notneeded' }, link: 'Open TL-FTA-12 and its scope checker rule' },
+      { k: 'assumptions', engine: 'Assumption Ledger', id: 'FTA-A07', kind: 'Confidence change', waiting: '7 days', ask: 'Lower confidence in FTA-A07 from 0.70 to 0.50: Indian customs accept exporter origin statements from the first year', evidence: [{ fact: 'Indian implementing notice', source: 'Indian Gazette search', date: '5 Nov 2026', status: 'Not found', tone: 'quiet' }, { fact: 'Origin verification tightened for preferential imports', source: 'EV-0421, Events Ledger', date: '2020', status: 'NEEDS PRIMARY', tone: 'attention' }], gates: { g1: 'done', g2: 'pending', g3: 'pending' }, link: 'Open FTA-A07 and its precedents' },
+      { k: 'setu', engine: 'Setu by AIA', id: 'SETU-0006', kind: 'Corridor decision', waiting: '6 days', ask: 'Send Noordbank N.V. a cross-border data pack: SCCs and a DPDP Act assessment', routing: 'Owner: Deal desk · Deputy: Head of Sales', evidence: [{ fact: 'Procurement asked for Standard Contractual Clauses', source: 'Email', date: '21 Oct 2026', status: 'Verified', tone: 'verified' }, { fact: 'Procurement asked for a DPDP Act assessment', source: 'Call notes', date: '22 Oct 2026', status: 'Reported', tone: 'neutral' }], actBy: 'Fri 28 Nov', link: 'Open its Regulation Register row, TL-FTA-21' },
+      { k: 'briefing', engine: 'Stakeholder Briefing', id: 'IG-2026-044', kind: 'Send approval', waiting: '3 days', ask: 'Send the week 45 role messages to 6 roles at Client A', evidence: [{ fact: 'Built from 2 register changes and 3 monitor results', source: 'Briefing run', date: '3 Nov 2026', status: 'Verified', tone: 'verified' }, { fact: 'Surcharge figure in the freight pricing message', source: 'Trade press', date: '2 Nov 2026', status: 'Not yet reviewed', tone: 'unreviewed' }], actBy: 'Fri 7 Nov, 09:00 send window', link: 'Open the briefing and its result log', mode: 'adjust', reason: 'Hold the freight pricing message until the surcharge figure is checked. Send the other five.' },
+      { k: 'monitor', engine: 'Company and Industry Monitor', id: 'MN-2026-0311', kind: 'Tier check', waiting: '2 days', ask: 'Keep Peer 2’s surcharge notice at Watch, not Engage', evidence: [{ fact: 'Peer 2 announced a peak-season surcharge on EU-India lanes', source: 'Peer 2 press page', date: '3 Nov 2026', status: 'Reported', tone: 'neutral' }], link: 'Open the monitor report' },
+      { k: 'literature', engine: 'Literature Research', id: 'LR-2026-07', kind: 'Direction approval', waiting: '2 days', ask: 'Pick one of three directions for the origin-rules review', evidence: [{ fact: '212 records found, 31 screened in', source: 'Search log', date: '4 Nov 2026', status: 'Verified', tone: 'verified' }], actBy: 'Wed 12 Nov', gates: { g1: 'notneeded', g2: 'notneeded', g3: 'pending' }, link: 'Open the review' },
+      { k: 'register', engine: 'Regulation Register', id: 'TL-FTA-28', kind: 'New row proposal', waiting: '1 day', ask: 'Add TL-FTA-28: review clause in the sustainability chapter', evidence: [{ fact: 'Review clause in the published sustainability chapter', source: 'EU trade portal', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' }, { fact: 'Effect on logistics firms', source: 'Register Watch', date: '5 Nov 2026', status: 'Unknown', tone: 'quiet' }], gates: { g1: 'pending', g2: 'pending', g3: 'notneeded' }, link: 'Open the draft row' },
+      { k: 'events', engine: 'Events Ledger', id: 'EV-0446', kind: 'New event coding', waiting: 'since today', ask: 'Add EV-0446 and code it as Pattern: Origin tightening, Lever: Rules of origin', evidence: [{ fact: 'Port authority notice on origin checks for FTA claims', source: 'Press summary', date: '5 Nov 2026', status: 'NEEDS PRIMARY', tone: 'attention' }], link: 'Open the draft event' }
+    ];
+    const F = [['all', 'All'], ['register', 'Regulation Register'], ['assumptions', 'Assumption Ledger'], ['setu', 'Setu by AIA'], ['briefing', 'Stakeholder Briefing'], ['monitor', 'Monitor'], ['literature', 'Literature Research'], ['events', 'Events Ledger']];
+    const f = this.state.filter;
+    const chips = F.map(([k, l]) => ({ label: l + ' ' + (k === 'all' ? I.length : I.filter(i => i.k === k).length), active: f === k, inactive: f !== k, pick: () => this.setState({ filter: k }) }));
+    return { narrow: !!this.props.narrow, chips, items: f === 'all' ? I : I.filter(i => i.k === f) };
+  }
+}
+</script>
+</body>
+</html>
