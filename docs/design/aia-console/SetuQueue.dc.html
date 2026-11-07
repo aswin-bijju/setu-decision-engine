@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="decide" engine="setu" narrow="{{ narrow }}" run="6 Nov 2026, 08:00" source="Setu engine, 28 signals" hint-size="100%,150px"></dc-import>
+<div style="border-bottom:1px solid #d6dce2"><div style="max-width:1152px;margin:0 auto;padding:0 16px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px">
+<nav aria-label="Setu" style="display:flex;flex-wrap:wrap;gap:0 24px"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6"><sc-if value="{{ t.active }}"><a href="#" aria-current="page" style="padding:12px 0 9px;font-size:15px;font-weight:600;color:#2f6f73;text-decoration:none;border-bottom:3px solid #2f6f73">{{ t.name }}</a></sc-if><sc-if value="{{ t.inactive }}"><a href="#" style="padding:12px 0 9px;font-size:15px;color:#566074;text-decoration:none;border-bottom:3px solid transparent" style-hover="color:#1f2a44">{{ t.name }}</a></sc-if></sc-for></nav>
+<button type="button" style="min-height:44px;padding:0 20px;margin:6px 0;font-family:inherit;font-size:16px;font-weight:600;color:#ffffff;background:#2f6f73;border:1px solid #2f6f73;border-radius:2px;cursor:pointer" style-hover="background:#1f2a44;border-color:#1f2a44">Run engine</button>
+</div></div>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">Setu by AIA · Week 45 · Briefing for the Head of Sales · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em;text-wrap:balance;max-width:640px">10 calls to make this week</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:740px;text-wrap:pretty">€547,551 of your Commit forecast has no current evidence behind it. €98,800 of expansion is waiting at existing customers. One deal carries EU-India timing, FX or regulatory risk. Each call below already has an owner and a deputy.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));background:#ffffff;border:1px solid #d6dce2">
+<sc-for list="{{ tiles }}" as="t" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px;padding:20px 24px;border-right:1px solid #d6dce2;border-bottom:1px solid #d6dce2"><span style="font-size:14px;color:#566074">{{ t.label }}</span><span style="font-size:30px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums">{{ t.value }}</span><span style="font-size:14px;color:#566074">{{ t.sub }}</span></div></sc-for>
+</div>
+<section style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Decisions to review</h2>
+<div role="group" aria-label="Status" style="display:flex;flex-wrap:wrap;gap:8px"><button type="button" aria-pressed="true" style="min-height:44px;padding:0 14px;font-family:inherit;font-size:15px;font-weight:600;color:#1f2a44;background:#e2eeee;border:1px solid #2f6f73;border-radius:2px">Waiting 10</button><button type="button" aria-pressed="false" style="min-height:44px;padding:0 14px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px" style-hover="background:#e2eeee">Approved</button><button type="button" aria-pressed="false" style="min-height:44px;padding:0 14px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px" style-hover="background:#e2eeee">Rerouted</button><button type="button" aria-pressed="false" style="min-height:44px;padding:0 14px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px" style-hover="background:#e2eeee">Set aside</button></div>
+</div>
+<div tabindex="0" role="region" aria-label="Decision queue" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Decision queue" style="min-width:1080px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:44px minmax(250px,2.2fr) 112px minmax(180px,1.3fr) 100px 124px 110px 100px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074">#</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074">Decision and account</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074">Agent</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074">Owner and deputy</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074;text-align:right">Impact</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074">Confidence</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074">Act by</span><span role="columnheader" style="padding:12px 12px;font-size:13px;font-weight:500;color:#566074"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Action</span></span></div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+<div role="row" style="display:grid;grid-template-columns:44px minmax(250px,2.2fr) 112px minmax(180px,1.3fr) 100px 124px 110px 100px;align-items:center;border-bottom:1px solid #d6dce2">
+<span role="cell" style="padding:16px 12px;font-weight:600;color:#2f6f73;font-variant-numeric:tabular-nums">{{ r.n }}</span>
+<span role="cell" style="padding:16px 12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;line-height:1.35">{{ r.title }}</span><span style="font-size:14px;color:#566074">{{ r.account }} · {{ r.id }}</span><sc-if value="{{ r.hasLink }}"><a href="#" style="font-size:14px;color:#2f6f73;text-underline-offset:3px">{{ r.link }}</a></sc-if></span>
+<span role="cell" style="padding:16px 12px;display:flex"><dc-import name="StatusTag" label="{{ r.agent }}" tone="neutral" hint-size="80px,22px"></dc-import></span>
+<span role="cell" style="padding:16px 12px;display:flex;flex-direction:column;font-size:14px"><span>{{ r.owner }}</span><span style="color:#566074">Deputy: {{ r.deputy }}</span></span>
+<span role="cell" style="padding:16px 12px;text-align:right;font-weight:600;font-variant-numeric:tabular-nums">{{ r.impact }}</span>
+<span role="cell" style="padding:16px 12px;display:flex;align-items:center;gap:8px"><span style="display:block;width:48px;height:6px;background:#e2eeee"><span style="display:block;height:6px;background:#2f6f73;width:{{ r.conf }}"></span></span><span style="font-variant-numeric:tabular-nums">{{ r.conf }}</span></span>
+<span role="cell" style="padding:16px 12px">{{ r.actBy }}</span>
+<span role="cell" style="padding:12px"><button type="button" style="min-height:44px;width:100%;font-family:inherit;font-size:15px;font-weight:600;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">Review</button></span>
+</div>
+</sc-for>
+</div>
+</div>
+<p style="margin:0;font-size:14px;color:#566074">Ranked on revenue impact, urgency, strategic fit and confidence. Top ten only, at most two per account. Nothing is written back to the CRM or Slack until a person approves it.</p>
+</section>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;padding-top:24px;border-top:1px solid #d6dce2">
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="margin:0;font-size:20px;font-weight:600">What was set aside</h3><p style="margin:0;color:#566074">10 calls fell below the confidence bar. <a href="#" style="color:#2f6f73;text-underline-offset:3px">See why</a></p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="margin:0;font-size:20px;font-weight:600">Signals behind this week</h3><p style="margin:0;color:#566074">28 signals, all matched to an account. Inject live signal sits on the Signals tab. <a href="#" style="color:#2f6f73;text-underline-offset:3px">Open signal log</a></p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="margin:0;font-size:20px;font-weight:600">The engine learns from you</h3><p style="margin:0;color:#566074">Each verdict moves the weight of the agent that made the call. <a href="#" style="color:#2f6f73;text-underline-offset:3px">See agent weights</a></p></div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const tabs = ['Decision queue', 'Accounts', 'ICP discovery', 'Signals', 'Audit and write-back', 'Engine'].map((n, i) => ({ name: n, active: i === 0, inactive: i !== 0 }));
+    const tiles = [
+      { label: 'Commit without evidence', value: '€547,551', sub: '100% of Commit. Check before the forecast call' },
+      { label: 'Calls to review', value: '10', sub: 'from 20 considered, 10 set aside' },
+      { label: 'Open pipeline', value: '€1,115,816', sub: '5 deals, at a fixed EUR/INR of 98' },
+      { label: 'Signals read', value: '28', sub: 'from 9 sources, all matched to an account' }
+    ];
+    const R = [
+      ['SETU-0001', 'Move from Commit to Best Case: champion quiet 24 days', 'Rheinwerk Automation GmbH, Germany', 'Forecast', 'Account owner, DACH (away)', 'Head of Sales', '€420,000', '80%', 'Thu 13 Nov'],
+      ['SETU-0002', 'Adoption review and reprice in EUR before the Diwali-week renewal', 'Indus Pharma Exports Ltd, India', 'Expansion', 'Account owner, India West', 'Head of Sales', '€127,551', '90%', 'Fri 7 Nov'],
+      ['SETU-0003', 'Strengthen sponsorship and engage the works council', 'Rheinwerk Automation GmbH, Germany', 'Champion', 'Account owner, DACH (away)', 'Head of Sales', '€252,000', '75%', 'Fri 14 Nov'],
+      ['SETU-0004', 'Move from Commit to Best Case: champion has left before the renewal', 'Indus Pharma Exports Ltd, India', 'Forecast', 'Account owner, India West', 'Head of Sales', '€127,551', '85%', 'Fri 7 Nov'],
+      ['SETU-0005', 'Open an expansion deal: 120 seats used on a 100-seat licence', 'Lumière Retail SA, France', 'Expansion', 'Account owner, France', 'Sales manager', '€98,800', '90%', 'Fri 21 Nov'],
+      ['SETU-0006', 'Send a cross-border data pack: SCCs and DPDP Act assessment', 'Noordbank N.V., Netherlands', 'Corridor', 'Deal desk', 'Head of Sales', '€124,000', '81%', 'Fri 28 Nov', 'Regulation Register row TL-FTA-21'],
+      ['SETU-0007', 'Run a deal review of the DACH pipeline', 'DACH territory', 'Manager', 'Sales manager', 'Head of Sales', '€103,000', '70%', 'Fri 21 Nov'],
+      ['SETU-0008', 'Run a deal review of the India West pipeline', 'India West territory', 'Manager', 'Sales manager', 'Head of Sales', '€87,510', '70%', 'Fri 21 Nov'],
+      ['SETU-0009', 'Counter Meridian Consulting', 'Noordbank N.V., Netherlands', 'Competition', 'Deal desk', 'Head of Sales', '€155,000', '60%', 'Fri 21 Nov'],
+      ['SETU-0010', 'Shift prospecting capacity to India South', 'Territory plan', 'Territory', 'Head of Sales', 'Sales manager', '€60,000', '75%', 'Fri 28 Nov']
+    ];
+    const rows = R.map((r, i) => ({ n: String(i + 1), id: r[0], title: r[1], account: r[2], agent: r[3], owner: r[4], deputy: r[5], impact: r[6], conf: r[7], actBy: r[8], link: r[9] || '', hasLink: !!r[9] }));
+    return { narrow: !!this.props.narrow, tabs, tiles, rows };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="watch" engine="monitor" narrow="{{ narrow }}" source="Monitor run, 41 results from 12 sources" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">Company and Industry Monitor · Client A and four peers · Week 45 · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em">Monitor report, week 45</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:760px;text-wrap:pretty">41 results this week, each with a tier. Crisis needs a person today, Watch needs a decision this week, Engage is an opening to respond, and Log is kept for the record.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));background:#ffffff;border:1px solid #d6dce2">
+<sc-for list="{{ tiers }}" as="t" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:4px;padding:20px 24px;border-right:1px solid #d6dce2;border-bottom:1px solid #d6dce2"><span style="font-size:15px;font-weight:600">{{ t.name }}</span><span style="font-size:32px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums">{{ t.n }}</span><span style="font-size:14px;color:#566074">{{ t.note }}</span></div></sc-for>
+</div>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Latest results</h2>
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
+<article style="display:flex;flex-direction:column;gap:10px;padding:18px 22px;background:#ffffff;border:1px solid #d6dce2">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px"><dc-import name="StatusTag" label="{{ r.tier }}" tone="{{ r.tierTone }}" hint-size="56px,22px"></dc-import><span style="font-size:14px;font-weight:600">{{ r.id }}</span><span style="font-size:14px;color:#566074">{{ r.company }}</span></div>
+<p style="margin:0;font-size:17px;font-weight:500">{{ r.fact }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px;color:#566074"><span>{{ r.source }}, {{ r.date }}</span><dc-import name="StatusTag" label="{{ r.status }}" tone="{{ r.tone }}" hint-size="70px,22px"></dc-import></div>
+<sc-if value="{{ r.hasReading }}"><div style="background:#e2eeee;padding:12px 16px"><strong style="font-weight:600">Our reading:</strong> {{ r.reading }}</div></sc-if>
+<sc-if value="{{ r.hasLink }}"><a href="#" style="align-self:flex-start;font-size:15px;color:#2f6f73;text-underline-offset:3px">{{ r.link }}</a></sc-if>
+</article>
+</sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Peer table</h2><p style="margin:0;color:#566074">Company-level counts for the last 7 days.</p></div>
+<div tabindex="0" role="region" aria-label="Peer table" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Peers" style="min-width:820px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:minmax(200px,1.6fr) 90px 80px 80px 80px 80px minmax(200px,1.4fr);border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Company</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074;text-align:right">Results</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074;text-align:right">Crisis</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074;text-align:right">Watch</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074;text-align:right">Engage</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074;text-align:right">Log</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Change on last week</span></div>
+<sc-for list="{{ peers }}" as="p" hint-placeholder-count="5"><div role="row" style="display:grid;grid-template-columns:minmax(200px,1.6fr) 90px 80px 80px 80px 80px minmax(200px,1.4fr);border-bottom:1px solid #d6dce2;font-variant-numeric:tabular-nums"><span role="cell" style="padding:12px 16px;font-weight:600">{{ p.name }}</span><span role="cell" style="padding:12px 16px;text-align:right">{{ p.total }}</span><span role="cell" style="padding:12px 16px;text-align:right">{{ p.c }}</span><span role="cell" style="padding:12px 16px;text-align:right">{{ p.w }}</span><span role="cell" style="padding:12px 16px;text-align:right">{{ p.e }}</span><span role="cell" style="padding:12px 16px;text-align:right">{{ p.l }}</span><span role="cell" style="padding:12px 16px;color:#566074">{{ p.change }}</span></div></sc-for>
+</div>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const tiers = [
+      { name: 'Crisis', n: '0', note: 'No Crisis results this week' },
+      { name: 'Watch', n: '3', note: 'A decision this week' },
+      { name: 'Engage', n: '5', note: 'An opening to respond' },
+      { name: 'Log', n: '33', note: 'Kept for the record' }
+    ];
+    const results = [
+      { tier: 'Watch', tierTone: 'attention', id: 'MN-2026-0311', company: 'Peer 2', fact: 'Peer 2 announced a peak-season surcharge on EU-India lanes from 1 December.', source: 'Peer 2 press page', date: '3 Nov 2026', status: 'Reported', tone: 'neutral', reading: 'Client A’s freight pricing lead will be asked to match or explain. Tier check waits in the approvals inbox.', link: 'Open the tier check in the approvals inbox' },
+      { tier: 'Watch', tierTone: 'attention', id: 'MN-2026-0309', company: 'Client A', fact: 'A trade journal named Client A among forwarders hit by a customs IT outage.', source: 'Trade journal', date: '2 Nov 2026', status: 'Not yet reviewed', tone: 'unreviewed', reading: 'If true, customers may ask about delays. Check before anyone replies.', link: '' },
+      { tier: 'Engage', tierTone: 'neutral', id: 'MN-2026-0305', company: 'Industry', fact: 'An industry association asked members for input on origin procedures under the FTA.', source: 'Association newsletter', date: '31 Oct 2026', status: 'Verified', tone: 'verified', reading: '', link: 'Linked to register row TL-FTA-13' },
+      { tier: 'Log', tierTone: 'quiet', id: 'MN-2026-0301', company: 'Peer 4', fact: 'Peer 4 opened a sales office in Pune.', source: 'Peer 4 press page', date: '30 Oct 2026', status: 'Reported', tone: 'neutral', reading: '', link: '' }
+    ].map(r => ({ ...r, hasReading: !!r.reading, hasLink: !!r.link }));
+    const peers = [
+      { name: 'Client A', total: '9', c: '0', w: '1', e: '1', l: '7', change: 'Up 3, one Watch item' },
+      { name: 'Peer 1', total: '7', c: '0', w: '0', e: '1', l: '6', change: 'No change' },
+      { name: 'Peer 2', total: '11', c: '0', w: '2', e: '1', l: '8', change: 'Up 5, surcharge notice' },
+      { name: 'Peer 3', total: '6', c: '0', w: '0', e: '1', l: '5', change: 'Down 2' },
+      { name: 'Peer 4', total: '8', c: '0', w: '0', e: '1', l: '7', change: 'Up 1, new Pune office' }
+    ];
+    return { narrow: !!this.props.narrow, tiers, results, peers };
+  }
+}
+</script>
+</body>
+</html>

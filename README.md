@@ -14,6 +14,12 @@ The running app still uses the original interface. The redesign puts an owner on
 |---|---|---|
 | [![Decision queue](docs/design/1-decision-queue.png)](docs/design/1-decision-queue.png) | [![Decision detail](docs/design/2-decision-detail.png)](docs/design/2-decision-detail.png) | [![Agent weights](docs/design/3-engine-weights.png)](docs/design/3-engine-weights.png) |
 
+## AIA console (November 2026, designed, not yet built)
+
+Hi-fi mockups of the internal AIA console, where Setu is one engine alongside the others: one shell for every engine, an approvals inbox, the three review gates, and a key screen each for the Events Ledger, Assumption Ledger, Regulation Register, Monitor, Literature Research and Stakeholder Briefing, plus the client role message and the public scope checker. All data is fictional. The pages are in [`docs/design/aia-console`](docs/design/aia-console); start with `AIA Console Update.dc.html` and read that folder's README for what changed and the open questions.
+
+Draft: the ledger screens still use placeholder taxonomy and evidence classes, to be aligned with the live ledgers before anything is built.
+
 ## Run it
 
 Requires Python 3.10 or later. No packages to install.

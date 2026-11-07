@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:column;gap:8px"><p style="margin:0;font-size:14px;font-weight:500;color:#566074">Component states · Fictional demo data</p><h1 style="margin:0;font-size:clamp(30px,3.4cqi,48px);line-height:1.1;font-weight:600">Every state of the new components</h1><p style="margin:0;max-width:740px">Built only from the inferred Setu tokens. Where a StatusTag variant does the job, no new component exists.</p></div>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">StatusTag, existing, five tones</h2>
+<sc-for list="{{ tagRows }}" as="row" hint-placeholder-count="5"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:12px 0;border-top:1px solid #d6dce2"><span style="flex:0 0 200px;font-size:14px;color:#566074">{{ row.name }}</span><sc-for list="{{ row.tags }}" as="t" hint-placeholder-count="4"><dc-import name="StatusTag" label="{{ t.label }}" tone="{{ t.tone }}" hint-size="80px,22px"></dc-import></sc-for></div></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">GateBar, new</h2>
+<div style="display:flex;flex-direction:column;gap:12px;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2">
+<dc-import name="GateBar" g1="pending" g2="pending" g3="pending" hint-size="100%,26px"></dc-import>
+<dc-import name="GateBar" g1="done" g2="pending" g3="notneeded" hint-size="100%,26px"></dc-import>
+<dc-import name="GateBar" g1="done" g2="done" g3="done" hint-size="100%,26px"></dc-import>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">ApprovalItem, new: default, adjust, reject, approved</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;align-items:start">
+<dc-import name="ApprovalItem" item="{{ item }}" mode="default" hint-size="100%,320px"></dc-import>
+<dc-import name="ApprovalItem" item="{{ item }}" mode="adjust" reason="Keep the stage at Negotiation until the Indian text is found." hint-size="100%,420px"></dc-import>
+<dc-import name="ApprovalItem" item="{{ item }}" mode="reject" hint-size="100%,420px"></dc-import>
+<dc-import name="ApprovalItem" item="{{ item }}" mode="approved" hint-size="100%,300px"></dc-import>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">PrecedentCard, new: ledger lead, verified, counter-case, dropped</h2>
+<dc-import name="GatePrecedents" state="cards" status="pending" hint-size="100%,1600px"></dc-import>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">Gate 1, no close precedent</h2>
+<dc-import name="GatePrecedents" state="none" hint-size="100%,260px"></dc-import>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">Gate 2, adjusted with a reason</h2>
+<dc-import name="GateScope" state="adjusted" hint-size="100%,900px"></dc-import>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">Gate 3, direction approved</h2>
+<dc-import name="GateDirections" state="approved" hint-size="100%,700px"></dc-import>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:24px;font-weight:600">SourcedFact and ReadingBlock, new</h2>
+<div style="display:flex;flex-direction:column;gap:6px;padding:14px 18px;background:#ffffff;border:1px solid #d6dce2"><span>The published rules-of-origin chapter lets exporters state origin themselves.</span><div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px;color:#566074"><span>Source: EU trade portal, consolidated text, 27 Oct 2026</span><dc-import name="StatusTag" label="Reported" tone="neutral" hint-size="64px,22px"></dc-import></div></div>
+<div style="background:#e2eeee;padding:14px 18px"><strong style="font-weight:600">Our reading:</strong> interpretation always sits in this block, apart from the facts, and starts with Our reading or Inference.</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const tagRows = [
+      { name: 'Verification labels', tags: [['Verified', 'verified'], ['Reported', 'neutral'], ['Not yet reviewed', 'unreviewed'], ['NEEDS PRIMARY', 'attention']] },
+      { name: 'Normal empty states', tags: [['Unknown', 'quiet'], ['Not found', 'quiet'], ['No close precedent', 'quiet'], ['No change this week', 'quiet']] },
+      { name: 'Gate states', tags: [['Pending', 'attention'], ['Done', 'verified'], ['Not needed', 'quiet']] },
+      { name: 'Evidence class (EvidenceTag)', tags: [['E1 Primary legal text', 'neutral'], ['E2 Official record', 'neutral'], ['E3 Peer-reviewed study', 'neutral'], ['E4 Press report', 'neutral'], ['E5 Grey literature', 'neutral'], ['E6 Unverified claim', 'neutral'], ['Ledger lead, not yet verified', 'unreviewed']] },
+      { name: 'Agents and engines, one style', tags: [['Corridor agent', 'neutral'], ['Forecast agent', 'neutral'], ['Assumption Ledger', 'neutral'], ['Waiting for a person', 'attention']] }
+    ].map(r => ({ name: r.name, tags: r.tags.map(([label, tone]) => ({ label, tone })) }));
+    const item = { engine: 'Regulation Register', id: 'TL-FTA-12', kind: 'Change proposal', waiting: '9 days', ask: 'Move TL-FTA-12, rules of origin, from Negotiation to Text published', evidence: [{ fact: 'Consolidated rules-of-origin text published', source: 'EU trade portal', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' }], actBy: 'Fri 7 Nov', gates: { g1: 'done', g2: 'pending', g3: 'notneeded' } };
+    return { tagRows, item };
+  }
+}
+</script>
+</body>
+</html>

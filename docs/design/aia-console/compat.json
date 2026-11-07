@@ -1,0 +1,150 @@
+{
+  "v": 1,
+  "mode": "omelette",
+  "root": "project/",
+  "title": "UI design project setup",
+  "entry": "AIA Console Update.dc.html",
+  "pages": [
+    {
+      "path": "AIA Console Update.dc.html",
+      "title": "AIA Console Update",
+      "kind": "page"
+    },
+    {
+      "path": "ComponentStates.dc.html",
+      "title": "ComponentStates",
+      "kind": "component"
+    },
+    {
+      "path": "PublicScopeChecker.dc.html",
+      "title": "PublicScopeChecker",
+      "kind": "component"
+    },
+    {
+      "path": "LiteratureReview.dc.html",
+      "title": "LiteratureReview",
+      "kind": "component"
+    },
+    {
+      "path": "MonitorReport.dc.html",
+      "title": "MonitorReport",
+      "kind": "component"
+    },
+    {
+      "path": "SetuDecision.dc.html",
+      "title": "SetuDecision",
+      "kind": "component"
+    },
+    {
+      "path": "SetuQueue.dc.html",
+      "title": "SetuQueue",
+      "kind": "component"
+    },
+    {
+      "path": "EventsLedger.dc.html",
+      "title": "EventsLedger",
+      "kind": "component"
+    },
+    {
+      "path": "AssumptionLedger.dc.html",
+      "title": "AssumptionLedger",
+      "kind": "component"
+    },
+    {
+      "path": "RegulationRegister.dc.html",
+      "title": "RegulationRegister",
+      "kind": "component"
+    },
+    {
+      "path": "StakeholderBriefing.dc.html",
+      "title": "StakeholderBriefing",
+      "kind": "component"
+    },
+    {
+      "path": "ApprovalsInbox.dc.html",
+      "title": "ApprovalsInbox",
+      "kind": "component"
+    },
+    {
+      "path": "ShellMenu.dc.html",
+      "title": "ShellMenu",
+      "kind": "component"
+    },
+    {
+      "path": "ShellRail.dc.html",
+      "title": "ShellRail",
+      "kind": "component"
+    },
+    {
+      "path": "GateReview.dc.html",
+      "title": "GateReview",
+      "kind": "component"
+    },
+    {
+      "path": "GateDirections.dc.html",
+      "title": "GateDirections",
+      "kind": "component"
+    },
+    {
+      "path": "GateScope.dc.html",
+      "title": "GateScope",
+      "kind": "component"
+    },
+    {
+      "path": "GatePrecedents.dc.html",
+      "title": "GatePrecedents",
+      "kind": "component"
+    },
+    {
+      "path": "RoleMessage.dc.html",
+      "title": "RoleMessage",
+      "kind": "component"
+    },
+    {
+      "path": "PrecedentCard.dc.html",
+      "title": "PrecedentCard",
+      "kind": "component"
+    },
+    {
+      "path": "ApprovalItem.dc.html",
+      "title": "ApprovalItem",
+      "kind": "component"
+    },
+    {
+      "path": "Shell.dc.html",
+      "title": "Shell",
+      "kind": "component"
+    },
+    {
+      "path": "GateBar.dc.html",
+      "title": "GateBar",
+      "kind": "component"
+    },
+    {
+      "path": "StatusTag.dc.html",
+      "title": "StatusTag",
+      "kind": "component"
+    }
+  ],
+  "migratorVersion": "artifact-migrator (claude-design-backend ed667f7ac9c1)",
+  "createdAt": "2026-11-07T10:46:44.373Z",
+  "source": {
+    "v": 1,
+    "app": "claude-design",
+    "url": "https://claude.ai/design/p/3d6237aa-f76b-43ad-8d9f-82425c0b3d77",
+    "projectId": "3d6237aa-f76b-43ad-8d9f-82425c0b3d77",
+    "exportedAt": "2026-11-07T10:46:44.373Z"
+  },
+  "report": {
+    "itemsVersion": 2,
+    "pages": {
+      "total": 1,
+      "ok": 1,
+      "partial": 0,
+      "notMigrated": 0
+    },
+    "items": [],
+    "truncated": 0,
+    "truncatedLeftOut": 0
+  }
+}

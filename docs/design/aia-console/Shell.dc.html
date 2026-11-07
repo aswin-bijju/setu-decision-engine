@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<header style="background:#f7f7f5;border-bottom:1px solid #d6dce2;font-family:Barlow,system-ui,sans-serif;color:#1f2a44">
+<sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:1152px;margin:0 auto;padding:20px 16px 0;box-sizing:border-box">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px">
+<div style="display:flex;flex-direction:column;gap:2px"><a href="#" style="font-size:20px;font-weight:600;line-height:1.2;color:#1f2a44;text-decoration:none">AIA Stakeholder Intelligence</a><span style="font-size:14px;color:#566074">Internal console · Fictional demo data</span></div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px">
+<label style="display:flex;align-items:center;gap:10px;font-size:14px;color:#566074">Find a record<input type="search" placeholder="EV-0137, FTA-A07, IG-2026-044, TL-FTA-12" style="width:320px;min-height:44px;box-sizing:border-box;padding:0 12px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px"></label>
+<div role="group" aria-label="Language" style="display:flex;border:1px solid #1f2a44;border-radius:2px;overflow:hidden"><button type="button" aria-pressed="true" style="min-width:48px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#ffffff;background:#1f2a44;border:0;cursor:pointer">EN</button><button type="button" aria-pressed="false" style="min-width:48px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#1f2a44;background:#ffffff;border:0;cursor:pointer" style-hover="background:#e2eeee">DE</button></div>
+</div>
+</div>
+<nav aria-label="Engine groups" style="display:flex;flex-wrap:wrap;gap:0 28px;margin-top:12px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<sc-if value="{{ g.active }}"><a href="#" aria-current="true" style="display:inline-flex;gap:6px;padding:10px 0 8px;font-size:16px;font-weight:600;color:#2f6f73;text-decoration:none;border-bottom:3px solid #2f6f73">{{ g.label }}<sc-if value="{{ g.hasCount }}"><span style="color:#1f2a44;font-weight:500">{{ g.count }}</span></sc-if></a></sc-if>
+<sc-if value="{{ g.inactive }}"><a href="#" style="display:inline-flex;gap:6px;padding:10px 0 8px;font-size:16px;font-weight:500;color:#566074;text-decoration:none;border-bottom:3px solid transparent" style-hover="color:#1f2a44">{{ g.label }}<sc-if value="{{ g.hasCount }}"><span style="color:#1f2a44">{{ g.count }}</span></sc-if></a></sc-if>
+</sc-for>
+</nav>
+</div>
+<div style="background:#ffffff;border-top:1px solid #d6dce2">
+<div style="max-width:1152px;margin:0 auto;padding:8px 16px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px">
+<nav aria-label="Engines in {{ groupLabel }}" style="display:flex;flex-wrap:wrap;gap:4px">
+<sc-for list="{{ engines }}" as="e" hint-placeholder-count="3">
+<sc-if value="{{ e.active }}"><a href="#" aria-current="page" style="display:inline-flex;align-items:baseline;gap:8px;padding:8px 12px;font-size:15px;font-weight:600;color:#1f2a44;background:#e2eeee;border-radius:2px;text-decoration:none">{{ e.name }}<span style="font-size:13px;font-weight:500;color:#566074">{{ e.layer }}</span></a></sc-if>
+<sc-if value="{{ e.inactive }}"><a href="#" style="display:inline-flex;align-items:baseline;gap:8px;padding:8px 12px;font-size:15px;color:#1f2a44;border-radius:2px;text-decoration:none" style-hover="background:#f7f7f5">{{ e.name }}<span style="font-size:13px;color:#566074">{{ e.layer }}</span></a></sc-if>
+</sc-for>
+</nav>
+<span style="font-size:14px;color:#566074">Last run {{ run }} · Source: {{ source }}</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isNarrow }}">
+<div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+<div style="display:flex;flex-direction:column;gap:2px"><a href="#" style="font-size:18px;font-weight:600;line-height:1.2;color:#1f2a44;text-decoration:none">AIA Stakeholder Intelligence</a><span style="font-size:13px;color:#566074">Internal console · Fictional demo data</span></div>
+<div role="group" aria-label="Language" style="display:flex;flex:none;border:1px solid #1f2a44;border-radius:2px;overflow:hidden"><button type="button" aria-pressed="true" style="min-width:44px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#ffffff;background:#1f2a44;border:0">EN</button><button type="button" aria-pressed="false" style="min-width:44px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#1f2a44;background:#ffffff;border:0">DE</button></div>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#566074">Find a record by ID<input type="search" placeholder="EV-, FTA-A, IG-2026-, TL-FTA-" style="width:100%;min-height:44px;box-sizing:border-box;padding:0 12px;font-family:inherit;font-size:16px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px"></label>
+<button type="button" aria-expanded="{{ open }}" onClick="{{ toggle }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:8px 14px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer;text-align:left"><span><strong style="font-weight:600">{{ groupLabel }}: {{ engineName }}</strong> <span style="color:#566074">{{ engineLayer }}</span></span><span style="color:#2f6f73;text-decoration:underline;white-space:nowrap">{{ toggleLabel }}</span></button>
+<sc-if value="{{ open }}">
+<nav aria-label="Engines" style="display:flex;flex-direction:column;gap:10px;background:#ffffff;border:1px solid #d6dce2;padding:10px 12px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column">
+<span style="font-size:13px;font-weight:600;color:#566074;padding:4px 0">{{ g.label }}</span>
+<sc-for list="{{ g.engines }}" as="e" hint-placeholder-count="2">
+<sc-if value="{{ e.active }}"><a href="#" aria-current="page" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;padding:0 10px;background:#e2eeee;color:#1f2a44;font-weight:600;text-decoration:none">{{ e.name }}<span style="font-size:13px;font-weight:500;color:#566074">{{ e.layer }}</span></a></sc-if>
+<sc-if value="{{ e.inactive }}"><a href="#" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;padding:0 10px;color:#1f2a44;text-decoration:none">{{ e.name }}<span style="font-size:13px;color:#566074">{{ e.layer }}</span></a></sc-if>
+</sc-for>
+</div>
+</sc-for>
+</nav>
+</sc-if>
+<span style="font-size:13px;color:#566074">Last run {{ run }} · Source: {{ source }}</span>
+</div>
+</sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:200},&quot;group&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;approvals&quot;,&quot;watch&quot;,&quot;records&quot;,&quot;decide&quot;,&quot;research&quot;],&quot;default&quot;:&quot;records&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;engine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;events&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;open&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;run&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6 Nov 2026, 07:45&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;source&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;all engines&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: null };
+  renderVals() {
+    const G = [
+      { key: 'approvals', label: 'Approvals', count: '8', engines: [{ key: 'approvals', name: 'Approvals inbox', layer: 'All engines' }] },
+      { key: 'watch', label: 'Watch', engines: [{ key: 'briefing', name: 'Stakeholder Briefing', layer: 'L5' }, { key: 'regwatch', name: 'Register Watch', layer: 'L1' }, { key: 'monitor', name: 'Company and Industry Monitor', layer: 'L2' }] },
+      { key: 'records', label: 'Records', engines: [{ key: 'register', name: 'Regulation Register', layer: 'L1' }, { key: 'assumptions', name: 'Assumption Ledger', layer: 'L3' }, { key: 'events', name: 'Events Ledger', layer: 'L0' }] },
+      { key: 'decide', label: 'Decide', engines: [{ key: 'scope', name: 'Scope checker', layer: 'L4' }, { key: 'setu', name: 'Setu by AIA', layer: 'L4' }] },
+      { key: 'research', label: 'Research', engines: [{ key: 'literature', name: 'Literature Research', layer: 'L2' }] }
+    ];
+    const gk = this.props.group || 'approvals';
+    const ek = this.props.engine || 'approvals';
+    const groups = G.map(g => ({ ...g, active: g.key === gk, inactive: g.key !== gk, hasCount: !!g.count, engines: g.engines.map(e => ({ ...e, active: e.key === ek, inactive: e.key !== ek })) }));
+    const ag = groups.find(g => g.active) || groups[0];
+    const ae = ag.engines.find(e => e.active) || ag.engines[0];
+    const narrow = !!this.props.narrow;
+    const open = this.state.open ?? !!this.props.open;
+    return { groups, engines: ag.engines, groupLabel: ag.label, engineName: ae.name, engineLayer: ae.layer, isNarrow: narrow, isWide: !narrow, open, toggleLabel: open ? 'Close' : 'Change engine', toggle: () => this.setState({ open: !open }), run: this.props.run || '6 Nov 2026, 07:45', source: this.props.source || 'all engines' };
+  }
+}
+</script>
+</body>
+</html>

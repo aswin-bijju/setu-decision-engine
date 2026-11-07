@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="watch" engine="briefing" narrow="{{ narrow }}" source="Briefing run IG-2026-044" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">IG-2026-044 · Week 45 · Client A, a fictional freight forwarder · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em;text-wrap:balance">Week 45 briefing for Client A</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:740px;text-wrap:pretty">Six role messages and one shared briefing. Nothing is sent until the send is approved.</p>
+<nav aria-label="Briefing parts" style="display:flex;flex-wrap:wrap;gap:4px 24px;font-size:15px"><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:10px 0">Part A, Role messages</a><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:10px 0">Part B, Shared briefing</a><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:10px 0">Part C, Result log</a><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:10px 0">Part D, Flags for Ash</a></nav>
+</div>
+<section aria-labelledby="pd" style="display:flex;flex-direction:column;gap:10px;padding:20px 24px;background:#ffffff;border:1px solid #8a5a12">
+<h2 id="pd" style="margin:0;font-size:20px;font-weight:600">Part D, Flags for Ash <span style="font-weight:500;color:#8a5a12">2</span></h2>
+<sc-for list="{{ flags }}" as="f" hint-placeholder-count="2"><div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding:8px 0;border-top:1px solid #d6dce2"><span style="flex:1 1 380px">{{ f.text }}</span><a href="#" style="font-size:15px;color:#2f6f73;text-underline-offset:3px">{{ f.link }}</a></div></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Part A, Role messages</h2><p style="margin:0;color:#566074">Six roles at Client A. The briefing stores roles only, never names.</p></div>
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+<nav aria-label="Roles" style="flex:1 1 280px;max-width:360px;display:flex;flex-direction:column;background:#ffffff;border:1px solid #d6dce2">
+<sc-for list="{{ roles }}" as="r" hint-placeholder-count="6">
+<sc-if value="{{ r.active }}"><a href="#" aria-current="true" style="display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-bottom:1px solid #d6dce2;background:#e2eeee;color:#1f2a44;text-decoration:none"><span style="font-weight:600">{{ r.name }}</span><span style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px"><dc-import name="StatusTag" label="{{ r.status }}" tone="{{ r.tone }}" hint-size="60px,22px"></dc-import><span style="font-size:13px;color:#1f2a44">{{ r.note }}</span></span></a></sc-if>
+<sc-if value="{{ r.inactive }}"><a href="#" style="display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-bottom:1px solid #d6dce2;color:#1f2a44;text-decoration:none" style-hover="background:#f7f7f5"><span style="font-weight:500">{{ r.name }}</span><span style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px"><dc-import name="StatusTag" label="{{ r.status }}" tone="{{ r.tone }}" hint-size="60px,22px"></dc-import><span style="font-size:13px;color:#566074">{{ r.note }}</span></span></a></sc-if>
+</sc-for>
+</nav>
+<div style="flex:999 1 520px;min-width:0"><dc-import name="RoleMessage" channel="preview" hint-size="100%,1300px"></dc-import></div>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Send approval</h2>
+<dc-import name="ApprovalItem" item="{{ sendItem }}" hint-size="100%,300px"></dc-import>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Part C, Result log</h2><p style="margin:0;max-width:760px">This quarter at Client A: 11 verified results, 3 reported, 2 not yet reviewed. Billing counts verified results only, at [ASK ASH: price per verified result].</p></div>
+<div tabindex="0" role="region" aria-label="Result log" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Result log" style="min-width:920px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:110px minmax(170px,1fr) minmax(240px,1.6fr) minmax(170px,1fr) 140px 90px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Result</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Role</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">What happened</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Source and date</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Verification</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Billing</span></div>
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
+<div role="row" style="display:grid;grid-template-columns:110px minmax(170px,1fr) minmax(240px,1.6fr) minmax(170px,1fr) 140px 90px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:14px 16px"><a href="#" style="font-weight:600;color:#2f6f73;text-underline-offset:3px">{{ r.id }}</a></span><span role="cell" style="padding:14px 16px">{{ r.role }}</span><span role="cell" style="padding:14px 16px;display:flex;flex-direction:column;gap:2px"><span>{{ r.what }}</span><sc-if value="{{ r.linked }}"><span style="font-size:13px;font-weight:600;color:#2f6f73">Linked from the role message above</span></sc-if></span><span role="cell" style="padding:14px 16px;color:#566074">{{ r.src }}</span><span role="cell" style="padding:14px 16px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="{{ r.status }}" tone="{{ r.tone }}" hint-size="70px,22px"></dc-import></span><span role="cell" style="padding:14px 16px">{{ r.bill }}</span></div>
+</sc-for>
+</div>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:6px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Part B, Shared briefing</h2>
+<p style="margin:0;max-width:760px">Goes to all six roles with their message: two register changes this week, one of which reaches the customs and compliance lead. <a href="#" style="color:#2f6f73;text-underline-offset:3px">Open Part B</a></p>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const R = [
+      ['Customs and compliance lead', 'Ready', 'verified', 'Act by 14 Nov'],
+      ['Freight pricing lead', 'Held', 'attention', 'One fact not yet reviewed'],
+      ['Head of logistics', 'Ready', 'verified', 'Act by 21 Nov'],
+      ['Finance controller', 'No change this week', 'quiet', ''],
+      ['Sales lead, India lanes', 'No change this week', 'quiet', ''],
+      ['Managing director', 'Shared briefing only', 'quiet', '']
+    ];
+    const roles = R.map((r, i) => ({ name: r[0], status: r[1], tone: r[2], note: r[3], active: i === 0, inactive: i !== 0 }));
+    const flags = [
+      { text: 'The freight pricing message cites a surcharge figure from trade press that is not yet reviewed.', link: 'Open the fact' },
+      { text: 'The shared briefing quotes the rules-of-origin text as Reported, and the Indian side as Not found.', link: 'Open TL-FTA-12' }
+    ];
+    const results = [
+      { id: 'R-043-01', role: 'Customs and compliance lead', what: 'Switched 12 shipments to the simplified origin procedure', src: 'Client confirmation, 31 Oct 2026', status: 'Verified', tone: 'verified', bill: 'Billable' },
+      { id: 'R-043-02', role: 'Freight pricing lead', what: 'Repriced two lanes before the surcharge date', src: 'Client report, 30 Oct 2026', status: 'Reported', tone: 'neutral', bill: 'Not yet' },
+      { id: 'R-043-03', role: 'Head of logistics', what: 'Moved one weekly consolidation from Hamburg to Rotterdam', src: 'Client confirmation, 29 Oct 2026', status: 'Verified', tone: 'verified', bill: 'Billable' },
+      { id: 'R-044-01', role: 'Customs and compliance lead', what: 'Open: waiting for the answer to this week’s message', src: 'No answer yet', status: 'Not yet reviewed', tone: 'unreviewed', bill: 'Not yet', linked: true }
+    ];
+    const sendItem = { engine: 'Stakeholder Briefing', id: 'IG-2026-044', kind: 'Send approval', waiting: '3 days', ask: 'Send the week 45 role messages to 6 roles at Client A', evidence: [{ fact: 'Built from 2 register changes and 3 monitor results', source: 'Briefing run', date: '3 Nov 2026', status: 'Verified', tone: 'verified' }, { fact: 'Surcharge figure in the freight pricing message', source: 'Trade press', date: '2 Nov 2026', status: 'Not yet reviewed', tone: 'unreviewed' }], actBy: 'Fri 7 Nov, 09:00 send window' };
+    return { narrow: !!this.props.narrow, roles, flags, results, sendItem };
+  }
+}
+</script>
+</body>
+</html>

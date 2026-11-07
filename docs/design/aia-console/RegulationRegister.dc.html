@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="records" engine="register" narrow="{{ narrow }}" source="Register Watch: EU trade portal and Indian Gazette" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:40px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;font-weight:500;color:#566074">Regulation Register · 27 rows · Fictional demo data</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em;text-wrap:balance">EU-India regulation register</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:740px;text-wrap:pretty">One row per rule that can reach a logistics company in the corridor. Register Watch proposes changes; a person approves each one before the row changes.</p>
+<p style="margin:0;font-size:14px;color:#566074">Last verified 5 Nov 2026 · General information, not legal advice.</p>
+</div>
+<div role="list" aria-label="Rows by lifecycle stage" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border:1px solid #d6dce2;background:#ffffff">
+<sc-for list="{{ stages }}" as="s" hint-placeholder-count="7"><div role="listitem" style="display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-right:1px solid #d6dce2;border-bottom:1px solid #d6dce2"><span style="font-size:14px;color:#566074">{{ s.name }}</span><span style="font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums">{{ s.n }}</span></div></sc-for>
+</div>
+<section style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Change proposals from Register Watch <span style="font-weight:500;color:#566074">3</span></h2><p style="margin:0;color:#566074">Oldest first. The same items appear in the approvals inbox.</p></div>
+<sc-for list="{{ proposals }}" as="it" hint-placeholder-count="3"><dc-import name="ApprovalItem" item="{{ it }}" hint-size="100%,280px"></dc-import></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Register</h2>
+<label style="display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:#566074">Lifecycle stage<select style="min-height:44px;min-width:200px;padding:0 10px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px"><option>All stages</option><option>Proposal</option><option>Negotiation</option><option>Text published</option><option>Signed</option><option>Ratification</option><option>In force</option><option>Unknown</option></select></label>
+</div>
+<div tabindex="0" role="region" aria-label="Register, 27 rows" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Regulation Register" style="min-width:900px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:104px minmax(240px,2fr) 170px 120px 140px 130px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">ID</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Rule</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Lifecycle stage</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Last change</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Verification</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Scope checker</span></div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+<div role="row" style="display:grid;grid-template-columns:104px minmax(240px,2fr) 170px 120px 140px 130px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:12px 16px"><a href="#" style="font-weight:600;color:#2f6f73;text-underline-offset:3px;font-variant-numeric:tabular-nums">{{ r.id }}</a></span><span role="cell" style="padding:12px 16px">{{ r.rule }}</span><span role="cell" style="padding:12px 16px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px"><dc-import name="StatusTag" label="{{ r.stage }}" tone="{{ r.stageTone }}" hint-size="90px,22px"></dc-import><sc-if value="{{ r.proposal }}"><dc-import name="StatusTag" label="Proposal pending" tone="attention" hint-size="110px,22px"></dc-import></sc-if></span><span role="cell" style="padding:12px 16px;color:#566074">{{ r.changed }}</span><span role="cell" style="padding:12px 16px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="{{ r.status }}" tone="{{ r.tone }}" hint-size="80px,22px"></dc-import></span><span role="cell" style="padding:12px 16px"><sc-if value="{{ r.hasRule }}"><a href="#" style="color:#2f6f73;text-underline-offset:3px">Rule {{ r.sr }}</a></sc-if><sc-if value="{{ r.noRule }}"><span style="color:#566074">No rule yet</span></sc-if></span></div>
+</sc-for>
+</div>
+</div>
+<p style="margin:0;font-size:14px;color:#566074">Last verified 5 Nov 2026 · General information, not legal advice. Unknown means the stage could not be confirmed from a source, not that something failed.</p>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const R = [
+      ['01', 'Tariff elimination, industrial goods', 'Negotiation', '14 Oct 2026', 'Reported', 'SR-01'], ['02', 'Tariff-rate quotas, agricultural goods', 'Negotiation', '2 Sep 2026', 'Reported', 'SR-02'],
+      ['03', 'Market access and national treatment', 'Text published', '27 Oct 2026', 'Reported', 'SR-03'], ['04', 'Sustainability chapter', 'Text published', '27 Oct 2026', 'Reported', 'SR-04'],
+      ['05', 'Sanitary and phytosanitary measures', 'Negotiation', '9 Jul 2026', 'Not yet reviewed', ''], ['06', 'Technical barriers to trade', 'Text published', '27 Oct 2026', 'Reported', 'SR-06'],
+      ['07', 'Customs and trade facilitation', 'Text published', '27 Oct 2026', 'Verified', 'SR-07'], ['08', 'Trade remedies and safeguards', 'Negotiation', '30 Jun 2026', 'Reported', 'SR-08'],
+      ['09', 'Government procurement', 'Unknown', 'Not found', 'Not yet reviewed', 'SR-09'], ['10', 'Maritime transport services', 'Negotiation', '3 Oct 2026', 'Reported', 'SR-10'],
+      ['11', 'Road and air freight services', 'Negotiation', '3 Oct 2026', 'Reported', 'SR-11'], ['12', 'Rules of origin', 'Negotiation', '27 Oct 2026', 'Reported', 'SR-12'],
+      ['13', 'Origin procedures and verification', 'Negotiation', '27 Oct 2026', 'NEEDS PRIMARY', 'SR-13'], ['14', 'Investment protection agreement', 'Negotiation', '18 Sep 2026', 'Reported', ''],
+      ['15', 'Geographical indications agreement', 'Negotiation', '18 Sep 2026', 'Reported', ''], ['16', 'Dispute settlement', 'Text published', '27 Oct 2026', 'Reported', 'SR-16'],
+      ['17', 'Digital trade', 'Unknown', 'Not found', 'Not yet reviewed', ''], ['18', 'Small and medium-sized enterprises', 'Text published', '27 Oct 2026', 'Reported', 'SR-18'],
+      ['19', 'Carbon border adjustment, import reporting', 'In force', '1 Oct 2026', 'Verified', 'SR-19'], ['20', 'Deforestation-free supply rules', 'Signed', '12 Aug 2026', 'Reported', 'SR-20'],
+      ['21', 'Personal data transfers to India', 'In force', '22 Oct 2026', 'Reported', 'SR-21'], ['22', 'Origin verification for preferential imports, India', 'In force', '5 Nov 2026', 'Verified', 'SR-22'],
+      ['23', 'EU customs data hub', 'Proposal', '16 May 2026', 'Reported', ''], ['24', 'Forced labour product ban', 'Signed', '3 Jun 2026', 'Reported', 'SR-24'],
+      ['25', 'Supply-chain due diligence, large companies', 'Ratification', '21 Jul 2026', 'Reported', 'SR-25'], ['26', 'Port and terminal security filing', 'In force', '8 Apr 2026', 'Verified', 'SR-26'],
+      ['27', 'Electronic bills of lading recognition', 'Ratification', '30 Sep 2026', 'Reported', 'SR-27']
+    ];
+    const T = { 'Verified': 'verified', 'Reported': 'neutral', 'Not yet reviewed': 'unreviewed', 'NEEDS PRIMARY': 'attention' };
+    const rows = R.map(r => ({ id: 'TL-FTA-' + r[0], rule: r[1], stage: r[2], stageTone: r[2] === 'Unknown' ? 'quiet' : 'neutral', proposal: r[0] === '12' || r[0] === '21', changed: r[3], status: r[4], tone: T[r[4]], sr: r[5], hasRule: !!r[5], noRule: !r[5] }));
+    const order = ['Proposal', 'Negotiation', 'Text published', 'Signed', 'Ratification', 'In force', 'Unknown'];
+    const stages = order.map(n => ({ name: n, n: String(R.filter(r => r[2] === n).length) }));
+    const proposals = [
+      { engine: 'Register Watch', id: 'TL-FTA-12', kind: 'Stage change', waiting: '9 days', ask: 'Move TL-FTA-12, rules of origin, from Negotiation to Text published', evidence: [{ fact: 'Consolidated rules-of-origin text published', source: 'EU trade portal', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' }, { fact: 'Matching Indian text', source: 'Indian Gazette search', date: '5 Nov 2026', status: 'Not found', tone: 'quiet' }], actBy: 'Fri 7 Nov', gates: { g1: 'done', g2: 'pending', g3: 'notneeded' }, link: 'Open scope checker rule SR-12' },
+      { engine: 'Register Watch', id: 'TL-FTA-21', kind: 'Verification change', waiting: '4 days', ask: 'Raise TL-FTA-21, personal data transfers, from Reported to Verified', evidence: [{ fact: 'Transfer rules read against the published notification', source: 'Official gazette, primary text', date: '22 Oct 2026', status: 'Verified', tone: 'verified' }], link: 'Linked from Setu decision SETU-0006' },
+      { engine: 'Register Watch', id: 'TL-FTA-28', kind: 'New row', waiting: '1 day', ask: 'Add TL-FTA-28: review clause in the sustainability chapter', evidence: [{ fact: 'Review clause in the published sustainability chapter', source: 'EU trade portal', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' }, { fact: 'Effect on logistics firms', source: 'Register Watch', date: '5 Nov 2026', status: 'Unknown', tone: 'quiet' }], gates: { g1: 'pending', g2: 'pending', g3: 'notneeded' } }
+    ];
+    return { narrow: !!this.props.narrow, rows, stages, proposals };
+  }
+}
+</script>
+</body>
+</html>

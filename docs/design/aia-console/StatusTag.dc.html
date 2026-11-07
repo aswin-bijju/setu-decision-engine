@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<sc-if value="{{ isNeutral }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;font-family:Barlow,system-ui,sans-serif;font-size:12px;font-weight:500;line-height:16px;padding:2px 7px;border:1px solid #566074;border-radius:2px;color:#1f2a44;background:#ffffff;white-space:nowrap">{{ label }}</span></sc-if>
+<sc-if value="{{ isVerified }}"><span style="display:inline-flex;align-items:center;font-family:Barlow,system-ui,sans-serif;font-size:12px;font-weight:600;line-height:16px;padding:2px 7px;border:1px solid #2f6f73;border-radius:2px;color:#2f6f73;background:#e2eeee;white-space:nowrap">{{ label }}</span></sc-if>
+<sc-if value="{{ isAttention }}"><span style="display:inline-flex;align-items:center;font-family:Barlow,system-ui,sans-serif;font-size:12px;font-weight:600;line-height:16px;padding:2px 7px;border:1px solid #8a5a12;border-radius:2px;color:#8a5a12;background:#ffffff;white-space:nowrap">{{ label }}</span></sc-if>
+<sc-if value="{{ isUnreviewed }}"><span style="display:inline-flex;align-items:center;font-family:Barlow,system-ui,sans-serif;font-size:12px;font-weight:500;line-height:16px;padding:2px 7px;border:1px dashed #566074;border-radius:2px;color:#566074;background:#ffffff;white-space:nowrap">{{ label }}</span></sc-if>
+<sc-if value="{{ isQuiet }}"><span style="display:inline-flex;align-items:center;font-family:Barlow,system-ui,sans-serif;font-size:12px;font-weight:500;line-height:16px;padding:2px 7px;border:1px solid #d6dce2;border-radius:2px;color:#566074;background:#ffffff;white-space:nowrap">{{ label }}</span></sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:220,&quot;height&quot;:40},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Verified&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;neutral&quot;,&quot;verified&quot;,&quot;attention&quot;,&quot;unreviewed&quot;,&quot;quiet&quot;],&quot;default&quot;:&quot;neutral&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.tone || 'neutral';
+    return { label: this.props.label ?? 'Reported', isNeutral: t === 'neutral', isVerified: t === 'verified', isAttention: t === 'attention', isUnreviewed: t === 'unreviewed', isQuiet: t === 'quiet' };
+  }
+}
+</script>
+</body>
+</html>

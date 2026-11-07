@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="records" engine="assumptions" narrow="{{ narrow }}" source="Assumption Ledger, nightly check" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:32px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<nav aria-label="Breadcrumb" style="display:flex;flex-wrap:wrap;gap:6px;font-size:14px;color:#566074"><a href="#" style="color:#2f6f73">Assumption Ledger</a><span>/</span><span aria-current="page">FTA-A07</span></nav>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px"><span style="font-size:15px;font-weight:600">FTA-A07</span><dc-import name="StatusTag" label="Regulatory behaviour" tone="neutral" hint-size="130px,22px"></dc-import><dc-import name="StatusTag" label="Under review" tone="attention" hint-size="90px,22px"></dc-import><span style="font-size:14px;color:#566074">Fictional demo data</span></div>
+<h1 style="margin:0;font-size:clamp(30px,3.4cqi,48px);line-height:1.1;font-weight:600;letter-spacing:-0.01em;text-wrap:balance;max-width:960px">Indian customs accept exporter origin statements from the first year</h1>
+<dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));border:1px solid #d6dce2;background:#ffffff">
+<sc-for list="{{ facts }}" as="f" hint-placeholder-count="5"><div style="display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-right:1px solid #d6dce2;border-bottom:1px solid #d6dce2"><dt style="font-size:13px;color:#566074">{{ f.k }}</dt><dd style="margin:0;font-size:17px;font-weight:600">{{ f.v }}</dd></div></sc-for>
+</dl>
+<div style="display:flex;flex-direction:column;gap:8px;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2">
+<dc-import name="GateBar" g1="done" g2="pending" g3="pending" hint-size="100%,26px"></dc-import>
+<div style="display:flex;flex-wrap:wrap;gap:4px 24px;font-size:15px"><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:8px 0">Open the review gates</a><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:8px 0">Precedents: EV-0402, EV-0377</a><a href="#" style="color:#2f6f73;text-underline-offset:3px;padding:8px 0">Counter-case: EV-0421</a></div>
+</div>
+</div>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Evidence</h2>
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<sc-for list="{{ evidence }}" as="col" hint-placeholder-count="2">
+<div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2">
+<h3 style="margin:0 0 4px;font-size:18px;font-weight:600">{{ col.title }}</h3>
+<sc-for list="{{ col.items }}" as="e" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:6px;padding:12px 0;border-bottom:1px solid #d6dce2"><span>{{ e.fact }}</span><div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px;color:#566074"><span>{{ e.source }}, {{ e.date }}</span><dc-import name="StatusTag" label="{{ e.status }}" tone="{{ e.tone }}" hint-size="70px,22px"></dc-import></div></div></sc-for>
+</div>
+</sc-for>
+</div>
+<div style="background:#e2eeee;padding:16px 20px;max-width:860px"><strong style="font-weight:600">Our reading:</strong> the EU text supports the assumption, but the Indian side is silent and the 2020 precedent points the other way. A confidence of 0.50 says that plainly until the Indian notice is published.</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Red team findings</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<sc-for list="{{ redteam }}" as="r" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:8px;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2"><div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:14px;font-weight:600">{{ r.id }}</span><dc-import name="StatusTag" label="{{ r.status }}" tone="{{ r.tone }}" hint-size="70px,22px"></dc-import></div><span>{{ r.text }}</span><span style="font-size:14px;color:#566074">{{ r.note }}</span></div></sc-for>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Forecast register</h2>
+<div tabindex="0" role="region" aria-label="Forecasts tied to FTA-A07" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Forecasts" style="min-width:720px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:80px minmax(300px,2fr) 110px 130px 100px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">ID</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Forecast</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Probability</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Resolves by</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Status</span></div>
+<sc-for list="{{ forecasts }}" as="f" hint-placeholder-count="2"><div role="row" style="display:grid;grid-template-columns:80px minmax(300px,2fr) 110px 130px 100px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:12px 16px;font-weight:600">{{ f.id }}</span><span role="cell" style="padding:12px 16px">{{ f.text }}</span><span role="cell" style="padding:12px 16px;font-variant-numeric:tabular-nums">{{ f.p }}</span><span role="cell" style="padding:12px 16px">{{ f.by }}</span><span role="cell" style="padding:12px 16px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="Open" tone="neutral" hint-size="44px,22px"></dc-import></span></div></sc-for>
+</div>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Changelog</h2>
+<div tabindex="0" role="region" aria-label="Changelog for FTA-A07" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Changelog" style="min-width:780px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:120px minmax(200px,1.3fr) minmax(240px,1.6fr) 180px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Date</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Change</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Reason</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">By role</span></div>
+<sc-for list="{{ changes }}" as="c" hint-placeholder-count="4"><div role="row" style="display:grid;grid-template-columns:120px minmax(200px,1.3fr) minmax(240px,1.6fr) 180px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:12px 16px;color:#566074">{{ c.date }}</span><span role="cell" style="padding:12px 16px">{{ c.change }}</span><span role="cell" style="padding:12px 16px">{{ c.reason }}</span><span role="cell" style="padding:12px 16px">{{ c.by }}</span></div></sc-for>
+</div>
+</div>
+</section>
+<div style="display:flex;flex-direction:column;gap:6px;font-size:15px">
+<p style="margin:0">Used in: <a href="#" style="color:#2f6f73;text-underline-offset:3px">role message IG-2026-044, customs and compliance lead</a> and <a href="#" style="color:#2f6f73;text-underline-offset:3px">literature review LR-2026-07</a>.</p>
+<p style="margin:0;font-size:14px;color:#566074">Last verified 5 Nov 2026 · General information, not legal advice.</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const facts = [{ k: 'Type', v: 'Regulatory behaviour' }, { k: 'Confidence', v: '0.70, proposed 0.50' }, { k: 'Owner role', v: 'Trade policy analyst' }, { k: 'Opened', v: '12 Mar 2026' }, { k: 'Last reviewed', v: '30 Oct 2026' }];
+    const evidence = [
+      { title: 'Evidence for', items: [
+        { fact: 'The published EU text lets exporters state origin without a certificate.', source: 'EU trade portal', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' },
+        { fact: 'An earlier EU agreement moved to exporter declarations in its first year.', source: 'EV-0402, Events Ledger', date: '2011', status: 'Verified', tone: 'verified' } ] },
+      { title: 'Evidence against', items: [
+        { fact: 'Indian implementing notice on origin statements.', source: 'Indian Gazette search', date: '5 Nov 2026', status: 'Not found', tone: 'quiet' },
+        { fact: 'India tightened origin verification for preferential imports.', source: 'EV-0421, Events Ledger', date: '2020', status: 'NEEDS PRIMARY', tone: 'attention' } ] }
+    ];
+    const redteam = [
+      { id: 'RT-03', text: 'The assumption mixes two things: legal acceptance and practice at ports.', status: 'Open', tone: 'attention', note: 'Raised 30 Oct 2026' },
+      { id: 'RT-05', text: 'No source covers the first year specifically.', status: 'Addressed', tone: 'verified', note: 'Wording changed on 14 Sep 2026' }
+    ];
+    const forecasts = [
+      { id: 'F-12', text: 'India publishes an implementing notice on exporter statements', p: '55%', by: '31 Mar 2027' },
+      { id: 'F-13', text: 'At least one Indian port rejects exporter statements in the first six months', p: '35%', by: '30 Sep 2027' }
+    ];
+    const changes = [
+      { date: '30 Oct 2026', change: 'Confidence 0.70 to 0.50 proposed', reason: 'Indian notice not found; counter-case EV-0421', by: 'Register Watch agent' },
+      { date: '14 Sep 2026', change: 'Evidence added: EV-0402', reason: 'Precedent verified as E2 Official record', by: 'Trade policy analyst' },
+      { date: '2 Jun 2026', change: 'Confidence 0.60 to 0.70', reason: 'Negotiation round report', by: 'Trade policy analyst' },
+      { date: '12 Mar 2026', change: 'Row opened at 0.60', reason: 'Client A scope review', by: 'Trade policy analyst' }
+    ];
+    return { narrow: !!this.props.narrow, facts, evidence, redteam, forecasts, changes };
+  }
+}
+</script>
+</body>
+</html>

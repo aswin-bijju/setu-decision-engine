@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<header style="background:#f7f7f5;border-bottom:1px solid #d6dce2">
+<div style="max-width:1152px;margin:0 auto;padding:16px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px">
+<div style="display:flex;flex-direction:column;gap:2px;flex:1 1 220px"><a href="#" style="font-size:20px;font-weight:600;line-height:1.2;color:#1f2a44;text-decoration:none">AIA Stakeholder Intelligence</a><span style="font-size:14px;color:#566074">Internal console · Fictional demo data</span></div>
+<button type="button" aria-expanded="true" style="flex:1 1 300px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:6px 14px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer;text-align:left"><span><span style="color:#566074">Records / </span><strong style="font-weight:600">Events Ledger</strong> <span style="color:#566074">L0</span></span><span style="color:#2f6f73;text-decoration:underline;white-space:nowrap">Switch engine</span></button>
+<label style="flex:1 1 240px;display:flex;flex-direction:column;gap:2px;font-size:13px;color:#566074">Find a record by ID<input type="search" placeholder="EV-, FTA-A, IG-2026-, TL-FTA-" style="width:100%;min-height:44px;box-sizing:border-box;padding:0 12px;font-family:inherit;font-size:15px;color:#1f2a44;background:#ffffff;border:1px solid #566074;border-radius:2px"></label>
+<div role="group" aria-label="Language" style="display:flex;border:1px solid #1f2a44;border-radius:2px;overflow:hidden"><button type="button" aria-pressed="true" style="min-width:44px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#ffffff;background:#1f2a44;border:0">EN</button><button type="button" aria-pressed="false" style="min-width:44px;min-height:42px;font-family:inherit;font-size:14px;font-weight:600;color:#1f2a44;background:#ffffff;border:0">DE</button></div>
+</div>
+<nav aria-label="All engines" style="background:#ffffff;border-top:1px solid #d6dce2">
+<div style="max-width:1152px;margin:0 auto;padding:20px 16px 24px;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:20px 24px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;gap:4px">
+<span style="font-size:13px;font-weight:600;color:#566074;padding-bottom:4px;border-bottom:1px solid #d6dce2">{{ g.label }}</span>
+<sc-for list="{{ g.engines }}" as="e" hint-placeholder-count="2">
+<sc-if value="{{ e.active }}"><a href="#" aria-current="page" style="display:flex;flex-direction:column;gap:2px;padding:10px;background:#e2eeee;color:#1f2a44;text-decoration:none"><span style="display:flex;justify-content:space-between;gap:8px;font-weight:600">{{ e.name }}<span style="font-size:13px;font-weight:500;color:#566074">{{ e.layer }}</span></span><span style="font-size:14px;color:#566074">{{ e.purpose }}</span></a></sc-if>
+<sc-if value="{{ e.inactive }}"><a href="#" style="display:flex;flex-direction:column;gap:2px;padding:10px;color:#1f2a44;text-decoration:none" style-hover="background:#f7f7f5"><span style="display:flex;justify-content:space-between;gap:8px;font-weight:600">{{ e.name }}<span style="font-size:13px;font-weight:500;color:#566074">{{ e.layer }}</span></span><span style="font-size:14px;color:#566074">{{ e.purpose }}</span></a></sc-if>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</nav>
+</header>
+<main style="max-width:1152px;margin:0 auto;padding:32px 16px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:14px;color:#566074">Last run 6 Nov 2026, 07:45 · Source: Events Ledger import v12</p>
+<h1 style="margin:0;font-size:clamp(32px,3.6cqi,52px);line-height:1.08;font-weight:600;letter-spacing:-0.01em">Events Ledger</h1>
+<p style="margin:0;font-size:18px;line-height:1.6;max-width:680px">445 historical events from 1760 to 2026, coded by 5-year block, country, Pattern and Lever.</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G = [
+      { label: 'Approvals', engines: [['Approvals inbox', 'All', '8 waiting, oldest first']] },
+      { label: 'Watch', engines: [['Stakeholder Briefing', 'L5', 'Role messages, shared briefing, result log'], ['Register Watch', 'L1', 'Proposes changes to the register'], ['Company and Industry Monitor', 'L2', 'Mentions by tier, peer table']] },
+      { label: 'Records', engines: [['Regulation Register', 'L1', '27 rules with a lifecycle stage'], ['Assumption Ledger', 'L3', 'Assumptions, evidence, forecasts'], ['Events Ledger', 'L0', '445 events, 1760 to 2026']] },
+      { label: 'Decide', engines: [['Scope checker', 'L4', 'Which rules reach a company'], ['Setu by AIA', 'L4', 'Commercial calls for EU-India sales']] },
+      { label: 'Research', engines: [['Literature Research', 'L2', 'Reviews with evidence tables']] }
+    ];
+    const groups = G.map(g => ({ label: g.label, engines: g.engines.map(([name, layer, purpose]) => ({ name, layer, purpose, active: name === 'Events Ledger', inactive: name !== 'Events Ledger' })) }));
+    return { groups };
+  }
+}
+</script>
+</body>
+</html>

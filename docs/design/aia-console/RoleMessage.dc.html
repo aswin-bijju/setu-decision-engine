@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<article lang="{{ langCode }}" style="background:#ffffff;border:1px solid #d6dce2;font-family:Barlow,system-ui,sans-serif;color:#1f2a44;font-size:16px;line-height:1.55">
+<sc-if value="{{ isEmail }}" hint-placeholder-val="{{ true }}">
+<div style="padding:16px 20px;border-bottom:1px solid #d6dce2;display:flex;flex-direction:column;gap:2px;font-size:14px">
+<div><span style="color:#566074">{{ t.fromLabel }} </span>AIA Stakeholder Intelligence</div>
+<div><span style="color:#566074">{{ t.toLabel }} </span>{{ t.to }}</div>
+<div style="font-size:18px;font-weight:600;line-height:1.3;margin-top:8px;text-wrap:pretty">{{ subject }}</div>
+</div>
+</sc-if>
+<sc-if value="{{ isSlack }}">
+<div style="padding:14px 20px 0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:14px"><strong style="font-weight:600;font-size:15px">AIA Stakeholder Intelligence</strong><dc-import name="StatusTag" label="App" tone="quiet" hint-size="36px,22px"></dc-import><span style="color:#566074">09:00 · {{ t.slackWhere }}</span></div>
+<div style="padding:8px 20px 0;font-size:18px;font-weight:600;line-height:1.3;text-wrap:pretty">{{ subject }}</div>
+</sc-if>
+<sc-if value="{{ isPreview }}">
+<div style="padding:12px 20px;border-bottom:1px solid #d6dce2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:#f7f7f5"><span style="font-size:14px;font-weight:600">Preview, as the role will see it</span><dc-import name="StatusTag" label="Waiting for send approval" tone="attention" hint-size="170px,22px"></dc-import></div>
+</sc-if>
+<div style="padding:20px;display:flex;flex-direction:column;gap:20px">
+<p style="margin:0;font-size:13px;color:#566074">{{ t.kicker }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px 32px">
+<div style="display:flex;flex-direction:column"><span style="font-size:13px;font-weight:600;color:#566074">{{ t.toLabel }}</span><span style="font-weight:600">{{ t.role }}</span></div>
+<sc-if value="{{ hasChange }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column"><span style="font-size:13px;font-weight:600;color:#566074">{{ t.actByLabel }}</span><span style="font-weight:600">{{ t.actBy }}</span></div></sc-if>
+</div>
+<sc-if value="{{ hasChange }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<section style="display:flex;flex-direction:column;gap:4px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.whyLabel }}</h4><p style="margin:0">{{ t.why }}</p></section>
+<section style="display:flex;flex-direction:column"><h4 style="margin:0 0 4px;font-size:13px;font-weight:600;color:#566074">{{ t.changedLabel }}</h4>
+<sc-for list="{{ t.facts }}" as="f" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:6px;padding:10px 0;border-bottom:1px solid #d6dce2"><span>{{ f.fact }}</span><div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px;color:#566074"><span>{{ t.sourceLabel }}: {{ f.source }}, {{ f.date }}</span><dc-import name="StatusTag" label="{{ f.status }}" tone="{{ f.tone }}" hint-size="70px,22px"></dc-import></div></div></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:6px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.numbersLabel }}</h4><div style="background:#e2eeee;padding:14px 16px"><strong style="font-weight:600">{{ t.inferLabel }}</strong> {{ t.numbers }}</div></section>
+<section style="display:flex;flex-direction:column;gap:6px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.checkLabel }}</h4><ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px"><sc-for list="{{ t.steps }}" as="s" hint-placeholder-count="3"><li>{{ s }}</li></sc-for></ol></section>
+<section style="display:flex;flex-direction:column;gap:4px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.talkLabel }}</h4><p style="margin:0">{{ t.talk }}</p></section>
+<section style="display:flex;flex-direction:column;gap:4px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.viewLabel }}</h4><p style="margin:0">{{ t.view }}</p></section>
+<div style="display:flex;flex-direction:column;gap:8px"><span style="font-weight:600">{{ t.resultQ }}</span><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ t.resultOpts }}" as="o" hint-placeholder-count="3"><button type="button" style="min-height:44px;padding:0 18px;font-family:inherit;font-size:15px;font-weight:600;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">{{ o }}</button></sc-for></div><span style="font-size:13px;color:#566074">{{ t.resultNote }}</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ noChange }}">
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="margin:0;font-size:24px;font-weight:600;line-height:1.2">{{ t.noTitle }}</h3>
+<p style="margin:0">{{ t.noBody }}</p>
+<p style="margin:0">{{ t.noNext }}</p>
+<section style="display:flex;flex-direction:column;gap:4px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.viewLabel }}</h4><p style="margin:0">{{ t.noView }}</p></section>
+</div>
+</sc-if>
+<sc-if value="{{ isPreview }}"><div style="display:flex;flex-wrap:wrap;gap:4px 20px;font-size:15px"><a href="#" style="color:#2f6f73;text-underline-offset:3px">Result log entry R-044-01</a><a href="#" style="color:#2f6f73;text-underline-offset:3px">Register row TL-FTA-12</a><a href="#" style="color:#2f6f73;text-underline-offset:3px">Assumption FTA-A07</a></div></sc-if>
+<div style="display:flex;flex-direction:column;gap:14px;padding-top:16px;border-top:1px solid #d6dce2">
+<section style="display:flex;flex-direction:column;gap:4px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.sharedLabel }}</h4><p style="margin:0">{{ t.shared }} <a href="#" style="color:#2f6f73;text-underline-offset:3px">{{ t.sharedLink }}</a></p></section>
+<section style="display:flex;flex-direction:column;gap:4px"><h4 style="margin:0;font-size:13px;font-weight:600;color:#566074">{{ t.teamLabel }}</h4><p style="margin:0;font-weight:600">{{ t.team }}</p><p style="margin:0;font-size:14px;color:#566074">{{ t.teamNote }}</p></section>
+</div>
+<p style="margin:0;font-size:13px;color:#566074">{{ t.footer }}</p>
+</div>
+</article>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:680,&quot;height&quot;:1400},&quot;channel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;email&quot;,&quot;slack&quot;,&quot;preview&quot;],&quot;default&quot;:&quot;email&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;de&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;nochange&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const EN = {
+      fromLabel: 'From', toLabel: 'To', to: 'Customs and compliance lead, Client A', role: 'Customs and compliance lead', slackWhere: 'direct message',
+      subject: 'Act by 14 Nov: origin statements for shipments to India', subjectNo: 'No change for you this week',
+      kicker: 'Role message · IG-2026-044 · Week 45 · Fictional demo data',
+      actByLabel: 'Act by', actBy: 'Friday 14 November 2026',
+      whyLabel: 'Why you', why: 'You prepare origin paperwork for exporter clients who ship to India.',
+      changedLabel: 'What changed', sourceLabel: 'Source',
+      facts: [
+        { fact: 'The published rules-of-origin chapter lets exporters state origin themselves, without a certificate from an authority.', source: 'EU trade portal, consolidated text', date: '27 Oct 2026', status: 'Reported', tone: 'neutral' },
+        { fact: 'The matching Indian implementing notice.', source: 'Indian Gazette search', date: '5 Nov 2026', status: 'Not found', tone: 'quiet' }
+      ],
+      numbersLabel: 'What it means for your numbers', inferLabel: 'Inference:',
+      numbers: 'you obtain about 40 certificates of origin a month for clients, at €35 each (your figures, September 2026). Once both sides apply the rule, most of these could become exporter statements: about €1,400 a month less in certificate fees for your clients.',
+      checkLabel: 'What to check or do',
+      steps: ['Check your clients’ three most-shipped HS codes against the product rules.', 'Ask your two largest exporter clients who will sign their statements.', 'Keep ordering certificates until the Indian notice is published.'],
+      talkLabel: 'Who to talk to', talk: 'Head of logistics · your customs broker · the AIA analyst desk, by replying to this message',
+      viewLabel: 'What would change this view', view: 'If the Indian notice keeps authority certificates, steps 2 and 3 change and the saving does not happen.',
+      resultQ: 'Tell us what you did', resultOpts: ['Done', 'Not relevant', 'Need help'],
+      resultNote: 'Your answer goes to the result log for this message. Nothing records whether you opened it.',
+      sharedLabel: 'Shared briefing for all roles', shared: 'Two register changes this week; one reaches your role.', sharedLink: 'Read the shared briefing',
+      teamLabel: 'Team question', team: 'Which of your exporter clients already ask you to handle origin statements?', teamNote: 'One answer per team, not per person.',
+      footer: 'Last verified 5 Nov 2026 · General information, not legal advice · Fictional demo data',
+      noTitle: 'No change for you this week', noBody: 'We checked 27 register rows and 41 monitor results against your role. None of them changes what you do.', noNext: 'Next check: Friday 14 November 2026.', noView: 'A published Indian implementing notice on origin statements would change this view.'
+    };
+    const DE = {
+      fromLabel: 'Von', toLabel: 'An', to: 'Leitung Zoll und Compliance, Kunde A', role: 'Leitung Zoll und Compliance', slackWhere: 'Direktnachricht',
+      subject: 'Handeln bis 14. Nov.: Ursprungserklärungen für Sendungen nach Indien', subjectNo: 'Diese Woche keine Änderung für Sie',
+      kicker: 'Rollennachricht · IG-2026-044 · KW 45 · Fiktive Demodaten',
+      actByLabel: 'Handeln bis', actBy: 'Freitag, 14. November 2026',
+      whyLabel: 'Warum Sie', why: 'Sie bereiten die Ursprungsunterlagen für Exportkunden vor, die nach Indien liefern.',
+      changedLabel: 'Was sich geändert hat', sourceLabel: 'Quelle',
+      facts: [
+        { fact: 'Das veröffentlichte Ursprungskapitel erlaubt Exporteuren, den Ursprung selbst zu erklären, ohne Bescheinigung einer Behörde.', source: 'EU-Handelsportal, konsolidierter Text', date: '27.10.2026', status: 'Gemeldet', tone: 'neutral' },
+        { fact: 'Die passende indische Durchführungsbekanntmachung.', source: 'Suche im indischen Amtsblatt', date: '05.11.2026', status: 'Nicht gefunden', tone: 'quiet' }
+      ],
+      numbersLabel: 'Was es für Ihre Zahlen bedeutet', inferLabel: 'Schlussfolgerung:',
+      numbers: 'Sie beschaffen für Kunden etwa 40 Ursprungszeugnisse im Monat zu je 35 € (Ihre Angaben, September 2026). Sobald beide Seiten die Regel anwenden, können die meisten davon durch Erklärungen der Exporteure ersetzt werden: etwa 1.400 € weniger Gebühren im Monat für Ihre Kunden.',
+      checkLabel: 'Was Sie prüfen oder tun sollten',
+      steps: ['Prüfen Sie die drei häufigsten HS-Codes Ihrer Kunden gegen die Produktregeln.', 'Fragen Sie Ihre zwei größten Exportkunden, wer deren Erklärungen unterschreibt.', 'Bestellen Sie weiter Ursprungszeugnisse, bis die indische Bekanntmachung veröffentlicht ist.'],
+      talkLabel: 'Mit wem Sie sprechen sollten', talk: 'Leitung Logistik · Ihr Zollagent · das AIA-Analyseteam, per Antwort auf diese Nachricht',
+      viewLabel: 'Was diese Einschätzung ändern würde', view: 'Wenn die indische Bekanntmachung bei behördlichen Zeugnissen bleibt, ändern sich Schritt 2 und 3, und die Einsparung entfällt.',
+      resultQ: 'Sagen Sie uns, was Sie getan haben', resultOpts: ['Erledigt', 'Nicht relevant', 'Brauche Hilfe'],
+      resultNote: 'Ihre Antwort geht in das Ergebnisprotokoll zu dieser Nachricht. Ob Sie die Nachricht geöffnet haben, wird nicht erfasst.',
+      sharedLabel: 'Gemeinsames Briefing für alle Rollen', shared: 'Zwei Änderungen im Register diese Woche, eine betrifft Ihre Rolle.', sharedLink: 'Gemeinsames Briefing lesen',
+      teamLabel: 'Teamfrage', team: 'Welche Ihrer Exportkunden bitten Sie schon heute, Ursprungserklärungen zu übernehmen?', teamNote: 'Eine Antwort pro Team, nicht pro Person.',
+      footer: 'Zuletzt geprüft 05.11.2026 · Allgemeine Informationen, keine Rechtsberatung · Fiktive Demodaten',
+      noTitle: 'Diese Woche keine Änderung für Sie', noBody: 'Wir haben 27 Registerzeilen und 41 Monitor-Ergebnisse mit Ihrer Rolle abgeglichen. Keines davon ändert, was Sie tun.', noNext: 'Nächste Prüfung: Freitag, 14. November 2026.', noView: 'Eine veröffentlichte indische Bekanntmachung zu Ursprungserklärungen würde diese Einschätzung ändern.'
+    };
+    const de = this.props.lang === 'de';
+    const t = de ? DE : EN;
+    const ch = this.props.channel || 'email';
+    const no = !!this.props.nochange;
+    return { t, langCode: de ? 'de' : 'en', subject: no ? t.subjectNo : t.subject, isEmail: ch === 'email', isSlack: ch === 'slack', isPreview: ch === 'preview', hasChange: !no, noChange: no };
+  }
+}
+</script>
+</body>
+</html>

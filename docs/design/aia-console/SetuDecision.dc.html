@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;display=swap"><style>body{margin:0}a{color:#2f6f73}a:hover{color:#1f2a44}*:focus-visible{outline:2px solid #2f6f73;outline-offset:2px}</style></helmet>
+<div style="background:#f7f7f5;color:#1f2a44;font-family:Barlow,system-ui,sans-serif;font-size:16px;line-height:1.5">
+<dc-import name="Shell" group="decide" engine="setu" narrow="{{ narrow }}" run="6 Nov 2026, 08:00" source="Setu engine, 28 signals" hint-size="100%,150px"></dc-import>
+<main style="max-width:1152px;margin:0 auto;padding:32px 16px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<a href="#" style="align-self:flex-start;font-size:15px;color:#2f6f73;text-underline-offset:3px;padding:6px 0">Back to decision queue</a>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px"><span style="font-size:15px;font-weight:600;color:#2f6f73">Call 6 of 10</span><span style="font-size:14px;color:#566074">SETU-0006</span><dc-import name="StatusTag" label="Corridor agent" tone="neutral" hint-size="96px,22px"></dc-import><dc-import name="StatusTag" label="Waiting for a person" tone="attention" hint-size="130px,22px"></dc-import><span style="font-size:14px;color:#566074">Fictional demo data</span></div>
+<h1 style="margin:0;font-size:clamp(30px,3.4cqi,48px);line-height:1.1;font-weight:600;letter-spacing:-0.01em;text-wrap:balance;max-width:980px">Send Noordbank N.V. a cross-border data pack: SCCs and a DPDP Act assessment</h1>
+<div style="display:flex;flex-wrap:wrap;gap:16px 40px">
+<div style="display:flex;flex-direction:column"><span style="font-size:14px;color:#566074">Impact on pipeline</span><span style="font-size:26px;font-weight:600;font-variant-numeric:tabular-nums">€124,000</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-size:14px;color:#566074">Confidence</span><span style="font-size:26px;font-weight:600;font-variant-numeric:tabular-nums">81%</span></div>
+<div style="display:flex;flex-direction:column"><span style="font-size:14px;color:#566074">Act by</span><span style="font-size:26px;font-weight:600">Fri 28 Nov, before the procurement review</span></div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;padding-top:28px;border-top:1px solid #d6dce2">
+<div style="flex:999 1 600px;min-width:0;display:flex;flex-direction:column;gap:28px">
+<section style="display:flex;flex-direction:column;gap:10px"><h2 style="margin:0;font-size:clamp(24px,2.2cqi,30px);font-weight:600;line-height:1.2">Why Setu suggests this</h2><div style="background:#e2eeee;padding:16px 20px;font-size:17px"><strong style="font-weight:600">Our reading:</strong> procurement has asked for two documents that Noordbank needs before it can sign. Sending both now removes the last blocker named so far, without changing price or scope.</div></section>
+<section style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font-size:20px;font-weight:600">What the data shows</h3>
+<div tabindex="0" role="region" aria-label="Facts behind this call" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Facts" style="min-width:640px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:minmax(240px,2fr) 150px 120px 130px;border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Fact</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Source</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Date</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Verification</span></div>
+<sc-for list="{{ facts }}" as="f" hint-placeholder-count="4"><div role="row" style="display:grid;grid-template-columns:minmax(240px,2fr) 150px 120px 130px;border-bottom:1px solid #d6dce2"><span role="cell" style="padding:14px 16px">{{ f.fact }}</span><span role="cell" style="padding:14px 16px;color:#566074">{{ f.source }}</span><span role="cell" style="padding:14px 16px;color:#566074">{{ f.date }}</span><span role="cell" style="padding:14px 16px;display:flex;align-items:flex-start"><dc-import name="StatusTag" label="{{ f.status }}" tone="{{ f.tone }}" hint-size="70px,22px"></dc-import></span></div></sc-for>
+</div>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font-size:20px;font-weight:600">What argues against it</h3><div style="display:flex;flex-direction:column;gap:6px;padding:16px 20px;background:#ffffff;border:1px solid #d6dce2"><span>Meridian Consulting is also in the deal and may answer the same request first (SETU-0009).</span><span style="font-size:15px;color:#8a5a12">81% is the Corridor agent’s rule-based score. Check the DPDP assessment scope with the deal desk before you approve.</span></div></section>
+<section style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font-size:20px;font-weight:600">What changes if you approve</h3>
+<div tabindex="0" role="region" aria-label="Write-back preview" style="overflow-x:auto;background:#ffffff;border:1px solid #d6dce2">
+<div role="table" aria-label="Write-back preview" style="min-width:600px;font-size:15px">
+<div role="row" style="display:grid;grid-template-columns:180px minmax(140px,1fr) minmax(200px,1.4fr);border-bottom:1px solid #d6dce2"><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Where</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">Now</span><span role="columnheader" style="padding:12px 16px;font-size:13px;font-weight:500;color:#566074">After</span></div>
+<sc-for list="{{ writes }}" as="w" hint-placeholder-count="3"><div role="row" style="display:grid;grid-template-columns:180px minmax(140px,1fr) minmax(200px,1.4fr);border-bottom:1px solid #d6dce2"><span role="cell" style="padding:14px 16px">{{ w.where }}</span><span role="cell" style="padding:14px 16px;color:#566074">{{ w.now }}</span><span role="cell" style="padding:14px 16px;font-weight:600">{{ w.after }}</span></div></sc-for>
+</div>
+</div>
+</section>
+<p style="margin:0;font-size:14px;color:#566074">Last verified 5 Nov 2026 · General information, not legal advice.</p>
+</div>
+<aside style="flex:1 1 300px;max-width:360px;display:flex;flex-direction:column;gap:20px">
+<div aria-label="Routing slip" style="background:#ffffff;border:1px solid #d6dce2">
+<div style="padding:14px 16px;border-bottom:1px solid #d6dce2;font-weight:600">Routing slip</div>
+<div style="padding:12px 16px;border-bottom:1px solid #d6dce2;display:flex;flex-direction:column"><span style="font-size:13px;color:#566074">Signal</span><span>Procurement asked for SCCs and a DPDP assessment</span></div>
+<div style="padding:12px 16px;border-bottom:1px solid #d6dce2;display:flex;flex-direction:column"><span style="font-size:13px;color:#566074">Owner</span><span style="text-decoration:line-through;text-decoration-color:#c2841f;text-decoration-thickness:2px">Deal desk, away until 10 Nov</span></div>
+<div style="padding:12px 16px;background:#e2eeee;display:flex;flex-direction:column"><span style="font-size:13px;color:#566074">Routed to deputy</span><span style="font-weight:600">Head of Sales</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<button type="button" style="min-height:48px;font-family:inherit;font-size:16px;font-weight:600;color:#ffffff;background:#2f6f73;border:1px solid #2f6f73;border-radius:2px;cursor:pointer" style-hover="background:#1f2a44;border-color:#1f2a44">Approve</button>
+<button type="button" style="min-height:48px;font-family:inherit;font-size:16px;font-weight:600;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">Adjust</button>
+<button type="button" style="min-height:48px;font-family:inherit;font-size:16px;font-weight:600;color:#1f2a44;background:#ffffff;border:1px solid #1f2a44;border-radius:2px;cursor:pointer" style-hover="background:#e2eeee">Reroute</button>
+<button type="button" style="min-height:44px;font-family:inherit;font-size:16px;font-weight:500;color:#2f6f73;background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer" style-hover="color:#1f2a44">Reject</button>
+<span style="font-size:14px;color:#566074;text-align:center">Adjust and Reject ask for a reason.</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:15px">
+<span style="font-weight:600">Related</span>
+<a href="#" style="color:#2f6f73;text-underline-offset:3px">Regulation Register row TL-FTA-21, personal data transfers to India</a>
+<a href="#" style="color:#2f6f73;text-underline-offset:3px">Scope checker rule SR-21</a>
+<a href="#" style="color:#2f6f73;text-underline-offset:3px">Account plan: Noordbank N.V.</a>
+<span style="font-size:14px;color:#566074">Your verdict is logged and moves the Corridor agent’s weight.</span>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;narrow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const facts = [
+      { fact: 'Procurement asked for Standard Contractual Clauses', source: 'Email', date: '21 Oct 2026', status: 'Verified', tone: 'verified' },
+      { fact: 'Procurement asked for a DPDP Act assessment', source: 'Call notes', date: '22 Oct 2026', status: 'Reported', tone: 'neutral' },
+      { fact: 'Deal at Proposal stage, €124,000', source: 'CRM field history', date: '24 Oct 2026', status: 'Verified', tone: 'verified' },
+      { fact: 'Which Noordbank data would move to India', source: 'CRM and email', date: '6 Nov 2026', status: 'Unknown', tone: 'quiet' }
+    ];
+    const writes = [
+      { where: 'CRM: next step', now: 'None set', after: 'Send SCCs and the DPDP assessment' },
+      { where: 'CRM: deal desk task', now: 'Nothing', after: 'Prepare the DPDP assessment by 21 Nov' },
+      { where: 'Slack', now: 'Nothing', after: 'Message to the Head of Sales with this evidence' }
+    ];
+    return { narrow: !!this.props.narrow, facts, writes };
+  }
+}
+</script>
+</body>
+</html>
